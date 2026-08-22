@@ -6,7 +6,7 @@ import { TechnicalLabel } from "./technical-label";
 
 export function ProjectFeature({ project, reverse = false }: { project: Project; reverse?: boolean }) {
   return (
-    <article className={reverse ? "project-feature project-feature--reverse" : "project-feature"}>
+    <article id={project.slug} className={reverse ? "project-feature project-feature--reverse" : "project-feature"}>
       <Reveal className="project-feature__head">
         <TechnicalLabel>PROJECT / {project.number}</TechnicalLabel>
         <h3>{project.title}</h3>

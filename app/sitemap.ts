@@ -9,6 +9,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "https://quan-tran-engineering.tvmquan-us.chatgpt.site";
   return [
     { url: base, changeFrequency: "monthly", priority: 1 },
+    { url: `${base}/projects`, changeFrequency: "monthly", priority: 0.9 },
     ...projects.map((project) => ({ url: `${base}/projects/${project.slug}`, changeFrequency: "monthly" as const, priority: 0.8 })),
   ];
 }

@@ -16,7 +16,10 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
       <Navbar />
       <main className="case-study">
         <header className="case-hero site-shell">
-          <TechnicalLabel>PROJECT / {project.number}</TechnicalLabel>
+          <div className="case-hero__topline">
+            <TechnicalLabel>PROJECT / {project.number}</TechnicalLabel>
+            <Link className="case-back" href="/projects"><span aria-hidden="true">←</span> All projects</Link>
+          </div>
           <h1>{project.title}</h1>
           <div className="case-categories">{project.categories.map((category) => <span key={category}>{category}</span>)}</div>
           <dl className="case-metadata">

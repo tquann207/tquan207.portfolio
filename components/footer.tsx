@@ -1,4 +1,5 @@
 import { profile } from "@/content/site";
+import { withBasePath } from "@/content/site-config";
 
 export function Footer() {
   return (
@@ -18,9 +19,9 @@ export function Footer() {
       <div className="site-shell footer-bottom">
         <div><strong>QUAN TRAN</strong><span>Mechanical Engineering<br />University of Cincinnati</span></div>
         <nav aria-label="Footer navigation">
-          <a href="/#projects">Projects</a>
-          <a href="/#experience">Experience</a>
-          <a href="/#about">About</a>
+          <a href={withBasePath("/projects")}>Projects</a>
+          <a href={withBasePath("/#experience")}>Experience</a>
+          <a href={withBasePath("/#about")}>About</a>
         </nav>
         <div className="footer-location"><span>Cincinnati, Ohio</span><span>© {new Date().getFullYear()}</span></div>
       </div>

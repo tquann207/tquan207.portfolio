@@ -1,3 +1,5 @@
+import { withBasePath } from "./site-config";
+
 export type Metric = { value: string; label: string };
 
 export type ProjectSection = {
@@ -37,8 +39,8 @@ export const profile = {
   phone: "(832) 206-7952",
   phoneHref: "+18322067952",
   linkedin: "https://www.linkedin.com/in/tvmquan",
-  profileImage: "/profile/quan-tran-headshot.webp" as string | null,
-  resume: "/resume/quan-tran-resume.pdf",
+  profileImage: withBasePath("/profile/quan-tran-headshot.webp") as string | null,
+  resume: withBasePath("/resume/quan-tran-resume.pdf"),
 };
 
 export const projects: Project[] = [

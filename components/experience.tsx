@@ -1,4 +1,5 @@
 import { boschMetrics } from "@/content/site";
+import { withBasePath } from "@/content/site-config";
 import { MediaPlaceholder } from "./media-placeholder";
 import { Reveal } from "./reveal";
 import { TechnicalLabel } from "./technical-label";
@@ -12,7 +13,7 @@ export function Experience() {
           <div className="experience-brand">
             <h2 id="experience-title" className="sr-only">Bosch Automotive R&amp;D Center Vietnam</h2>
             <div className="experience-logo-card">
-              <img src="/brands/bosch-logo.png" alt="Bosch" />
+              <img src={withBasePath("/brands/bosch-logo.png")} alt="Bosch" />
             </div>
             <p>COMPONENTS &amp; CONNECTOR ENGINEERING DEPARTMENT</p>
           </div>
