@@ -2,6 +2,12 @@ import { withBasePath } from "./site-config";
 
 export type Metric = { value: string; label: string };
 
+export type ProjectMedia = {
+  src: string;
+  alt: string;
+  label?: string;
+};
+
 export type ProjectSection = {
   id: string;
   eyebrow: string;
@@ -25,6 +31,7 @@ export type Project = {
   tools: string[];
   summary: string;
   metrics: Metric[];
+  media?: ProjectMedia[];
   sections: ProjectSection[];
 };
 
