@@ -5,7 +5,7 @@ export function Footer() {
   return (
     <footer className="footer" id="contact">
       <div className="site-shell footer-top">
-        <p>Mechanical engineering student ready to contribute through design, prototyping, testing, and validation.</p>
+        <p>Mechanical engineering student turning ideas into prototypes, test data, and better designs.</p>
         <div className="footer-contact" aria-label="Contact information">
           <span className="footer-contact__eyebrow">CONTACT / DIRECT</span>
           <div className="footer-contact__links">
