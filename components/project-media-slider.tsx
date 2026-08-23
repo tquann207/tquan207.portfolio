@@ -16,13 +16,23 @@ type ProjectMediaSliderProps = {
   intervalMs?: number;
 };
 
-export function ProjectMediaSlider({ slides, projectNumber, intervalMs = 4500 }: ProjectMediaSliderProps) {
-  const safeSlides = slides.length > 0
-    ? slides
-    : [{ alt: `Project ${projectNumber} media placeholder`, label: "PROJECT MEDIA", hint: "Asset required" }];
+export function ProjectMediaSlider({
+  slides,
+  projectNumber,
+  intervalMs = 4500,
+}: ProjectMediaSliderProps) {
+  const safeSlides =
+    slides.length > 0
+      ? slides
+      : [
+          {
+            alt: `Project ${projectNumber} media placeholder`,
+            label: "PROJECT MEDIA",
+            hint: "Asset required",
+          },
+        ];
 
   const [activeIndex, setActiveIndex] = useState(0);
-  const [isPaused, setIsPaused] = useState(false);
   const [reduceMotion, setReduceMotion] = useState<boolean | null>(null);
   const touchStartX = useRef<number | null>(null);
 
@@ -32,21 +42,28 @@ export function ProjectMediaSlider({ slides, projectNumber, intervalMs = 4500 }:
 
     updatePreference();
     mediaQuery.addEventListener?.("change", updatePreference);
-    return () => mediaQuery.removeEventListener?.("change", updatePreference);
+
+    return () => {
+      mediaQuery.removeEventListener?.("change", updatePreference);
+    };
   }, []);
 
   useEffect(() => {
-    if (safeSlides.length <= 1 || isPaused || reduceMotion !== false) return;
+    if (safeSlides.length <= 1 || reduceMotion !== false) return;
 
     const timer = window.setTimeout(() => {
       setActiveIndex((current) => (current + 1) % safeSlides.length);
     }, intervalMs);
 
-    return () => window.clearTimeout(timer);
-  }, [activeIndex, intervalMs, isPaused, reduceMotion, safeSlides.length]);
+    return () => {
+      window.clearTimeout(timer);
+    };
+  }, [activeIndex, intervalMs, reduceMotion, safeSlides.length]);
 
   useEffect(() => {
-    if (activeIndex >= safeSlides.length) setActiveIndex(0);
+    if (activeIndex >= safeSlides.length) {
+      setActiveIndex(0);
+    }
   }, [activeIndex, safeSlides.length]);
 
   const goTo = (index: number) => {
@@ -63,34 +80,39 @@ export function ProjectMediaSlider({ slides, projectNumber, intervalMs = 4500 }:
 
   const handleTouchEnd = (event: React.TouchEvent<HTMLDivElement>) => {
     if (touchStartX.current === null) return;
+
     const endX = event.changedTouches[0]?.clientX ?? touchStartX.current;
     const distance = endX - touchStartX.current;
     touchStartX.current = null;
 
     if (Math.abs(distance) < 50) return;
-    if (distance > 0) previous();
-    else next();
+
+    if (distance > 0) {
+      previous();
+    } else {
+      next();
+    }
   };
 
   const hasMultipleSlides = safeSlides.length > 1;
+  const activeSlide = safeSlides[activeIndex] ?? safeSlides[0];
 
   return (
-    <div
-      className="project-slider"
-      onMouseEnter={() => setIsPaused(true)}
-      onMouseLeave={() => setIsPaused(false)}
-      onFocusCapture={() => setIsPaused(true)}
-      onBlurCapture={(event) => {
-        if (!event.currentTarget.contains(event.relatedTarget as Node | null)) setIsPaused(false);
-      }}
-    >
-      <div className="project-slider__frame" onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
+    <div className="project-slider">
+      <div
+        className="project-slider__frame"
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
+      >
         <div className="project-slider__slides">
           {safeSlides.map((slide, index) => {
             const isActive = index === activeIndex;
+
             return (
               <div
-                className={`project-slider__slide${isActive ? " project-slider__slide--active" : ""}`}
+                className={`project-slider__slide${
+                  isActive ? " project-slider__slide--active" : ""
+                }`}
                 aria-hidden={!isActive}
                 key={`${slide.label}-${index}`}
               >
@@ -111,16 +133,31 @@ export function ProjectMediaSlider({ slides, projectNumber, intervalMs = 4500 }:
 
         {hasMultipleSlides ? (
           <div className="project-slider__arrows" aria-label="Project image controls">
-            <button type="button" onClick={previous} aria-label="Previous project image">←</button>
-            <button type="button" onClick={next} aria-label="Next project image">→</button>
+            <button
+              type="button"
+              onClick={previous}
+              aria-label="Previous project image"
+            >
+              ←
+            </button>
+            <button
+              type="button"
+              onClick={next}
+              aria-label="Next project image"
+            >
+              →
+            </button>
           </div>
         ) : null}
       </div>
 
       <div className="project-slider__footer">
         <div className="project-slider__caption">
-          <span>{String(activeIndex + 1).padStart(2, "0")} / {String(safeSlides.length).padStart(2, "0")}</span>
-          <strong>{safeSlides[activeIndex]?.label}</strong>
+          <span>
+            {String(activeIndex + 1).padStart(2, "0")} /{" "}
+            {String(safeSlides.length).padStart(2, "0")}
+          </span>
+          <strong>{activeSlide.label}</strong>
         </div>
 
         {hasMultipleSlides ? (
@@ -139,7 +176,11 @@ export function ProjectMediaSlider({ slides, projectNumber, intervalMs = 4500 }:
         ) : null}
 
         <span className="project-slider__auto">
-          {hasMultipleSlides && reduceMotion === false ? (isPaused ? "AUTO / PAUSED" : `AUTO / ${intervalMs / 1000} SEC`) : "MANUAL / STATIC"}
+          {!hasMultipleSlides
+            ? "STATIC / 1 IMAGE"
+            : reduceMotion === true
+              ? "AUTO / MOTION REDUCED"
+              : `AUTO / ${intervalMs / 1000} SEC`}
         </span>
       </div>
     </div>
