@@ -19,7 +19,7 @@ type ProjectMediaSliderProps = {
 export function ProjectMediaSlider({
   slides,
   projectNumber,
-  intervalMs = 4500,
+  intervalMs = 2000,
 }: ProjectMediaSliderProps) {
   const safeSlides =
     slides.length > 0
@@ -28,7 +28,7 @@ export function ProjectMediaSlider({
           {
             alt: `Project ${projectNumber} media placeholder`,
             label: "PROJECT MEDIA",
-            hint: "Asset required",
+            hint: "IMAGE PLACEHOLDER",
           },
         ];
 
@@ -95,7 +95,6 @@ export function ProjectMediaSlider({
   };
 
   const hasMultipleSlides = safeSlides.length > 1;
-  const activeSlide = safeSlides[activeIndex] ?? safeSlides[0];
 
   return (
     <div className="project-slider">
@@ -154,34 +153,26 @@ export function ProjectMediaSlider({
       <div className="project-slider__footer">
         <div className="project-slider__caption">
           <span>
-            {String(activeIndex + 1).padStart(2, "0")} /{" "}
+            IMAGE {String(activeIndex + 1).padStart(2, "0")} /{" "}
             {String(safeSlides.length).padStart(2, "0")}
           </span>
-          <strong>{activeSlide.label}</strong>
+          <strong>PROJECT MEDIA</strong>
         </div>
 
         {hasMultipleSlides ? (
           <div className="project-slider__dots" aria-label="Choose project image">
-            {safeSlides.map((slide, index) => (
+            {safeSlides.map((_, index) => (
               <button
                 type="button"
                 className={index === activeIndex ? "is-active" : ""}
                 onClick={() => goTo(index)}
-                aria-label={`Show image ${index + 1}: ${slide.label}`}
+                aria-label={`Show project image ${index + 1}`}
                 aria-current={index === activeIndex ? "true" : undefined}
-                key={`${slide.label}-dot-${index}`}
+                key={`project-media-dot-${index}`}
               />
             ))}
           </div>
         ) : null}
-
-        <span className="project-slider__auto">
-          {!hasMultipleSlides
-            ? "STATIC / 1 IMAGE"
-            : reduceMotion === true
-              ? "AUTO / MOTION REDUCED"
-              : `AUTO / ${intervalMs / 1000} SEC`}
-        </span>
       </div>
     </div>
   );
