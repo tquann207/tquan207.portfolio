@@ -12,15 +12,15 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
   const next = projects[(currentIndex + 1) % projects.length];
 
   const mediaSlides: ProjectMediaSlide[] = project.media?.length
-    ? project.media.map((media, index) => ({
+    ? project.media.map((media) => ({
         src: media.src,
         alt: media.alt,
-        label: media.label ?? `PROJECT IMAGE ${String(index + 1).padStart(2, "0")}`,
+        label: "PROJECT MEDIA",
       }))
-    : project.sections.map((section, index) => ({
-        alt: `${project.title}: ${section.mediaLabel ?? `project image ${index + 1}`}`,
-        label: section.mediaLabel ?? `PROJECT IMAGE ${String(index + 1).padStart(2, "0")}`,
-        hint: section.mediaHint,
+    : project.sections.map((_, index) => ({
+        alt: `${project.title} project image ${index + 1}`,
+        label: "PROJECT MEDIA",
+        hint: "IMAGE PLACEHOLDER",
       }));
 
   return (
