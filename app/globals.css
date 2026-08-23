@@ -139,7 +139,12 @@ button, input, textarea { font: inherit; }
 .projects-archive { padding-top: clamp(90px, 10vw, 150px); }
 .projects-archive__intro { display: grid; grid-template-columns: 3fr 9fr; gap: 28px; align-items: start; padding-bottom: clamp(70px, 9vw, 120px); }
 .projects-archive__intro > div { display: grid; grid-template-columns: minmax(0, 2fr) minmax(240px, 1fr); gap: 36px; align-items: end; }
-.projects-archive__intro h1 { margin: -10px 0 0; font-size: clamp(68px, 9vw, 138px); line-height: .84; letter-spacing: -.075em; }
+.projects-archive__intro h1 {
+  margin: -10px 0 0;
+  font-size: clamp(68px, 9vw, 138px);
+  line-height: 1.02;
+  letter-spacing: -.075em;
+}
 .projects-archive__intro p { margin: 0; color: #b8c2c7; font-size: 15px; line-height: 1.65; }
 .project-feature { scroll-margin-top: 82px; }
 
