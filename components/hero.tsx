@@ -3,7 +3,11 @@
 import anime from "animejs";
 import { useEffect, useRef } from "react";
 import { profile } from "@/content/site";
+import { withBasePath } from "@/content/site-config";
 import { TechnicalLabel } from "./technical-label";
+
+const ucLogo = withBasePath("/brands/uc-logo.png");
+const boschLogo = withBasePath("/brands/bosch-logo.png");
 
 export function Hero() {
   const root = useRef<HTMLElement>(null);
@@ -42,15 +46,33 @@ export function Hero() {
           <span className="hero-word-wrap"><span className="hero-word">MECHANICAL</span></span>
           <span className="hero-word-wrap"><span className="hero-word hero-word--accent">ENGINEERING</span></span>
         </h1>
+
         <div className="hero-support">
           <p className="hero-manifesto">Design. Build.<br />Test. Improve.</p>
-          <div className="hero-identity"><span>{profile.university}</span><span>Testing &amp; Validation Engineer Intern — Bosch</span></div>
+
+          <div className="hero-identity">
+            <div className="hero-affiliation">
+              <span className="hero-affiliation__logo">
+                <img src={ucLogo} alt="" aria-hidden="true" />
+              </span>
+              <span>{profile.university}</span>
+            </div>
+
+            <div className="hero-affiliation">
+              <span className="hero-affiliation__logo">
+                <img src={boschLogo} alt="" aria-hidden="true" />
+              </span>
+              <span>Testing &amp; Validation Engineer Intern — Bosch</span>
+            </div>
+          </div>
         </div>
+
         <div className="hero-actions">
           <a className="button button--dark" href="#projects">Explore projects <span aria-hidden="true">↘</span></a>
           <a className="button button--line" href={profile.resume} download>Resume <span aria-hidden="true">↓</span></a>
         </div>
       </div>
+
       <div className="hero-visual" onPointerMove={movePortrait} onPointerLeave={resetPortrait}>
         <svg className="hero-grid" viewBox="0 0 600 700" aria-hidden="true">
           <path className="hero-line" d="M40 100H560M40 350H560M40 600H560" />
