@@ -47,7 +47,38 @@ button, input, textarea { font: inherit; }
 .hero-word--accent { color: var(--accent); }
 .hero-support { opacity: 0; display: grid; grid-template-columns: 1fr 1.25fr; gap: 28px; margin-top: clamp(30px, 4vw, 56px); padding-top: 18px; border-top: 1px solid var(--border); }
 .hero-manifesto { margin: 0; font-size: clamp(24px, 2.6vw, 40px); line-height: .98; letter-spacing: -.05em; font-weight: 700; }
-.hero-identity { display: flex; flex-direction: column; gap: 8px; color: var(--muted); font-size: 13px; line-height: 1.4; }
+.hero-identity {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.hero-affiliation {
+  min-height: 38px;
+  display: grid;
+  grid-template-columns: 86px minmax(0, 1fr);
+  gap: 12px;
+  align-items: center;
+}
+
+.hero-affiliation__logo {
+  width: 86px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.hero-affiliation__logo img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
+  object-position: left center;
+}
 .hero-actions { opacity: 0; display: flex; align-items: center; gap: 12px; margin-top: 34px; }
 .button { min-height: 48px; padding: 0 18px; display: inline-flex; align-items: center; justify-content: space-between; gap: 26px; border: 1px solid var(--dark); font: 11px ui-monospace, monospace; text-transform: uppercase; letter-spacing: .08em; transition: transform .25s ease, color .25s ease, background .25s ease; }
 .button:hover { transform: translateY(-2px); }
