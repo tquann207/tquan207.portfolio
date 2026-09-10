@@ -9,10 +9,34 @@ export function Footer() {
         <div className="footer-contact" aria-label="Contact information">
           <span className="footer-contact__eyebrow">CONTACT / DIRECT</span>
           <div className="footer-contact__links">
-            <a href={`mailto:${profile.email}`}><span>Email</span><strong>{profile.email}</strong><b aria-hidden="true">↗</b></a>
-            <a href={profile.linkedin} target="_blank" rel="noreferrer"><span>LinkedIn</span><strong>linkedin.com/in/tvmquan</strong><b aria-hidden="true">↗</b></a>
-            <a href={`tel:${profile.phoneHref}`}><span>Phone</span><strong>{profile.phone}</strong><b aria-hidden="true">↗</b></a>
-          </div>
+  <a href={`mailto:${profile.email}`}>
+    <span>Email</span>
+    <strong>{profile.email}</strong>
+    <b aria-hidden="true">↗</b>
+  </a>
+
+  <a href={profile.linkedin} target="_blank" rel="noreferrer">
+    <span>LinkedIn</span>
+    <strong>linkedin.com/in/tvmquan</strong>
+    <b aria-hidden="true">↗</b>
+  </a>
+
+  <a href={`tel:${profile.phoneHref}`}>
+    <span>Phone</span>
+    <strong>{profile.phone}</strong>
+    <b aria-hidden="true">↗</b>
+  </a>
+
+  <a
+    href="https://tquann207.github.io/tquan207.portfolio/"
+    target="_blank"
+    rel="noreferrer"
+  >
+    <span>Portfolio</span>
+    <strong>tquann207.github.io/tquan207.portfolio</strong>
+    <b aria-hidden="true">↗</b>
+  </a>
+</div>
           <a className="footer-resume-download" href={profile.resume} download>Download résumé <span aria-hidden="true">↓</span></a>
         </div>
       </div>
