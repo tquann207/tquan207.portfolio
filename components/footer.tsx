@@ -27,15 +27,7 @@ export function Footer() {
     <b aria-hidden="true">↗</b>
   </a>
 
-  <a
-    href="https://tquann207.github.io/tquan207.portfolio/"
-    target="_blank"
-    rel="noreferrer"
-  >
-    <span>Portfolio</span>
-    <strong>tquann207.github.io/tquan207.portfolio</strong>
-    <b aria-hidden="true">↗</b>
-  </a>
+        
 </div>
           <a className="footer-resume-download" href={profile.resume} download>Download résumé <span aria-hidden="true">↓</span></a>
         </div>
