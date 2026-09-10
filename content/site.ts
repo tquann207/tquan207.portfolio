@@ -299,6 +299,7 @@ export const skillGroups = [
 export const boschMetrics: Metric[] = [
   { value: "5+", label: "Validation procedures" },
   { value: "300+", label: "Connector samples" },
-  { value: "6+", label: "Test programs" },
-  { value: "40+", label: "Pass / fail reports" },
+  { value: "6+", label: "Validation programs" },
+  { value: "15+", label: "Pass / fail reports" },
 ];
+
