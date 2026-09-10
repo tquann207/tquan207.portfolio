@@ -244,7 +244,25 @@ button, input, textarea { font: inherit; }
 .process-path { fill: none; stroke: var(--accent); stroke-width: 2; }
 .process-diagram ol { position: relative; z-index: 1; display: flex; flex-direction: column; justify-content: space-between; min-height: 680px; margin: 0; padding: 0; list-style: none; }
 .process-stage { opacity: 0; display: grid; grid-template-columns: 64px 1fr; align-items: center; min-height: 82px; }
-.process-stage > span { width: 26px; height: 26px; display: grid; place-items: center; color: white; background: var(--dark); border-radius: 50%; font: 8px ui-monospace, monospace; }
+.process-stage > span {
+  position: relative;
+  z-index: 2;
+  width: 26px;
+  height: 26px;
+  display: grid;
+  place-items: center;
+
+  color: white;
+  background: var(--dark);
+  border-radius: 50%;
+
+  font: 8px ui-monospace, monospace;
+
+  transition:
+    transform .32s cubic-bezier(.2, .8, .2, 1),
+    background-color .32s ease,
+    box-shadow .32s ease;
+}
 .process-stage div { display: grid; grid-template-columns: minmax(120px, 1fr) 2fr; gap: 28px; align-items: center; padding-block: 17px; border-bottom: 1px solid var(--border); }
 .process-stage strong { font-size: clamp(28px, 3.3vw, 50px); line-height: 1; letter-spacing: -.055em; text-transform: uppercase; }
 .process-stage small { color: var(--muted); font: 10px/1.5 ui-monospace, monospace; text-transform: uppercase; letter-spacing: .04em; }
