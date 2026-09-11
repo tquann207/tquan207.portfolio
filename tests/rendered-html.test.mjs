@@ -37,6 +37,38 @@ test("renders development preview metadata", { skip: !existsSync(new URL("../.op
 
 
 const standalone = !existsSync(new URL("../.openai/hosting.json", import.meta.url));
+test("project navigation follows the homepage order and always offers a return", { skip: !standalone }, () => {
+  const root = fileURLToPath(new URL("../out/", import.meta.url));
+  const base = "/tquan207.portfolio";
+  const home = readFileSync(join(root, "index.html"), "utf8");
+  const archive = readFileSync(join(root, "projects/index.html"), "utf8");
+  const details = readdirSync(join(root, "projects"), { withFileTypes: true })
+    .filter(entry => entry.isDirectory() && existsSync(join(root, "projects", entry.name, "index.html")))
+    .map(entry => readFileSync(join(root, "projects", entry.name, "index.html"), "utf8"));
+  assert.equal(details.length, 6, "All six detail pages remain available");
+  assert.ok(home.indexOf('id="experience"') < home.indexOf('id="projects"'));
+  assert.ok(home.indexOf('id="projects"') < home.indexOf('id="about"'));
+  for (const html of [home, archive, ...details]) {
+    const navigation = html.match(/<nav\b[^>]*id="primary-navigation"[^>]*>([\s\S]*?)<\/nav>/)?.[1];
+    assert.ok(navigation, "Primary navigation is rendered");
+    const links = [...navigation.matchAll(/<a\b[^>]*href="([^"]+)"[^>]*>([^<]+)<\/a>/g)];
+    assert.deepEqual(links.map(link => link[2]), ["Experience", "Projects", "About", "Resume", "Contact"]);
+    assert.equal(links[1][1], `${base}/#projects`, "Projects must return to the homepage section");
+  }
+  assert.ok(!home.includes('class="project-return-bar"'), "Homepage introduction stays unchanged");
+  for (const html of [archive, ...details]) {
+    const bar = html.match(/<nav\b[^>]*class="project-return-bar"[^>]*>([\s\S]*?)<\/nav>/)?.[1];
+    assert.ok(bar?.includes(`href="${base}/#projects"`), "Visible return link works without browser history or JavaScript");
+    assert.ok(bar.includes("Back to portfolio"));
+  }
+  for (const html of details) {
+    const returnLinks = [...html.matchAll(/<a\b[^>]*class="[^"]*\bproject-return-link\b[^"]*"[^>]*href="([^"]+)"[^>]*>/g)];
+    assert.equal(returnLinks.length, 2, "Detail pages provide top and bottom return links");
+    assert.ok(returnLinks.every(link => link[1] === `${base}/#projects`), "Both return links lead directly to the homepage project section");
+    assert.ok(html.includes('class="next-project"'), "Continue-to-next-project navigation remains available");
+  }
+});
+
 test("GitHub Pages export preserves local routes, files, and fragment targets", { skip: !standalone }, () => {
   const root = fileURLToPath(new URL("../out/", import.meta.url));
   const base = "/tquan207.portfolio";
