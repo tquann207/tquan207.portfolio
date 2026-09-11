@@ -16,10 +16,10 @@ export function About() {
           </dl>
         </Reveal>
         <Reveal className="about-copy" delay={80}>
-          <h2 id="about-title">I care about what happens when a design meets the physical world.</h2>
+          <h2 id="about-title">Designing for the physical world.</h2>
           <div className="about-prose">
-            <p>Growing up in Vietnam, a motorcycle crash made product safety personal. It pushed me to look beyond the object itself and ask how vehicles, infrastructure, protection systems, and human behavior interact.</p>
-            <p>That perspective now shapes how I approach mechanical engineering: define the requirement, build the system, measure what actually happens, document failure, and use the result to make the next version better.</p>
+            <p>Growing up in Vietnam, a motorcycle crash made product safety personal. That experience shaped my interest in automotive systems, testing and validation, and physical product development.</p>
+            <p>At the University of Cincinnati, I am developing that interest through mechanical engineering. My approach is to define the requirement, design and build, test, analyze the result, and improve the next version.</p>
           </div>
         </Reveal>
       </div>

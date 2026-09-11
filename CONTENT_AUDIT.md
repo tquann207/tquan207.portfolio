@@ -1,33 +1,34 @@
-# Content audit
+# Content provenance and open evidence
 
-## VERIFIED
+Reviewed 2026-09-10 against baseline commit `4438d9fa7683d43e21cc6c707dfe17b79928b1e2`, the rendered public website, and its downloadable `public/resume/quan-tran-resume.pdf`.
 
-- University of Cincinnati, B.S. Mechanical Engineering, expected May 2030.
-- GPA 3.8 from the August 20, 2026 resume.
-- Bosch Testing & Validation Engineer Intern experience and metrics from the August 20, 2026 resume.
-- Current-resume projects: Smart Delivery Box, Hybrid Health Supply Network, and F-Race STEM Competition.
-- Earlier-resume projects and results: Bridge Building Competition (First Prize, 2023), Water Jet Car (Top 4, 2022), and City-Level Water Rocket (Top 8, 2021).
-- Technical skills listed in the August 20, 2026 resume.
-- Approved professional headshot and Bosch logo supplied by the user.
-- Motorcycle-safety motivation and personal context from the supplied Cincinnati essay.
-- Public contact links: UC email and LinkedIn. Phone number is intentionally excluded from the site.
+## Source-backed content
 
-## MISSING
+“Source-backed” means the statement occurs in the portfolio or résumé; it does not mean the underlying engineering result was independently reproduced.
 
-- Project photographs, CAD renders, drawings, test setups, data plots, and videos.
-- Approved public Bosch testing/facility media beyond the company logo.
-- GitHub URL.
-- Detailed build records for the Water Jet Car and City-Level Water Rocket projects beyond the verified competition results.
+- UC B.S. Mechanical Engineering, expected May 2030; GPA 3.8 in the downloadable résumé.
+- Bosch role and June 2026 start, 5+ procedures, 300+ samples, and 6+ programs.
+- The current downloadable résumé says **supported preparation of 40+ pass/fail reports**. The previous website said “compiled 15+”. The revised site uses **40+ reports supported** to preserve the résumé's scope of responsibility. The two counts are not treated as equivalent measures.
+- Delivery Box: team leadership, CAD/DXF delivery, testing, and iterations from the résumé; do not assign undocumented electronics work to Quan.
+- Health Supply Network: requirements, verification and decision matrices, fabrication, and testing from the résumé; the broader hub remains a team concept.
+- F-Race: AutoCAD drawings and revision control, FEA support to technical experts, and updates from the résumé. Do not describe Quan as sole analyst.
+- Bridge performance details originate in the existing website, not the current résumé's project list. Its award is in the résumé.
+- Existing headshot, logos, public email, LinkedIn, and phone are retained. The earlier audit's statement that the phone was excluded was stale.
+- Summer 2027 co-op availability is stated in the downloadable résumé.
 
-## CONFLICTING
+## Claims requiring supporting artifacts
 
-- None after applying the August 20, 2026 resume as the current source of truth.
+- Delivery Box: 600 cycles, 60 N test load, 1 m drop with 5 kg payload, 200 insertion trials, and <2% reported false-trigger rate. Add acceptance criteria, raw counts, repeat conditions, and a failure/revision example. Do not assume the 200 trials are the rate's denominator.
+- Health Supply Network: publish the seven requirements and weighted decision matrix. Drop height and load are test conditions; do not infer pass/fail results.
+- F-Race: define “performance issues,” baseline and revised counts, and the 40% calculation. Judges and audience are presentation context.
+- Bridge: provide the 120 kg supported-mass test record, supports/loading arrangement, failure criterion, and calculation behind +25% relative to competition average. Mass is not force.
+- Bosch: no new numerical time/cost/accuracy improvements are claimed. The workflow graphic is generic public methodology, not an internal Bosch procedure or fixture.
+- Earlier Water Jet Car and Water Rocket pages retain concise competition records until detailed engineering evidence is supplied.
 
-## READY TO BUILD
+## Media and skills
 
-- Recruiter-facing homepage structure.
-- Four verified project case studies.
-- Bosch experience section.
-- Engineering process and technical capability sections.
-- About narrative using the supplied essay conservatively.
-- Intentional placeholders and a documented media replacement workflow.
+No project photographs, CAD files, FEA plots, or test logs were present in the repository at audit time. New engineering sheets summarize documented requirements/test scope; they are not original test records. Real media appears only when supplied.
+
+Only documented tool/project relationships are linked. In particular, the record does not identify the Delivery Box CAD package, so it is not labeled as SolidWorks usage. Siemens NX, GD&T, tolerance analysis, MATLAB, Python, LabVIEW, ESP32, and several fabrication skills still need specific artifacts. No proficiency percentages are used.
+
+Four substantive projects use the 10-part case-study structure. Two archival competition pages stay concise rather than inventing missing engineering details. Stable project IDs and all six route slugs are preserved.

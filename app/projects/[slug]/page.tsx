@@ -15,6 +15,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   if (!project) return {};
   return {
     title: project.title,
+    alternates: { canonical: `${process.env.NEXT_PUBLIC_SITE_URL ?? "https://tquann207.github.io/tquan207.portfolio"}/projects/${project.slug}/` },
     description: project.summary,
     openGraph: { title: `${project.title} — Quan Tran`, description: project.summary, images: [] },
     twitter: { title: `${project.title} — Quan Tran`, description: project.summary, images: [] },

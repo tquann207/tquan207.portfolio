@@ -4,7 +4,7 @@ import "./globals.css";
 
 const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL ??
-  "https://quan-tran-engineering.tvmquan-us.chatgpt.site";
+  "https://tquann207.github.io/tquan207.portfolio";
 const socialImageUrl = `${siteUrl.replace(/\/$/, "")}/og.png`;
 
 export const metadata: Metadata = {
@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     template: "%s — Quan Tran",
   },
   description:
-    "Mechanical Engineering student at the University of Cincinnati focused on design, testing, validation, prototyping, and physical product development.",
+    "Quan Tran, University of Cincinnati Mechanical Engineering student and Bosch Testing & Validation Engineer Intern. Projects in mechanical design, prototyping, and product development for internship and co-op opportunities.",
   openGraph: {
     type: "website",
     title: "Quan Tran — Mechanical Engineering Portfolio",
@@ -40,7 +40,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="antialiased">{children}</body>
+      <body className="antialiased"><a className="skip-link" href="#main-content">Skip to main content</a><noscript><style>{"@media(max-width:760px){.menu-button{display:none}.navbar{position:static;height:auto}.navbar-inner{flex-wrap:wrap;padding-block:12px}.nav-links{display:flex;flex-wrap:wrap;gap:8px 20px}}"}</style></noscript>{children}</body>
     </html>
   );
 }
