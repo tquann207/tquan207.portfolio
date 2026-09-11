@@ -1,6 +1,6 @@
 import { withBasePath } from "./site-config";
 
-export type Metric = { value: string; label: string };
+export type Metric = { value: string; label: string; kind?: "test" | "reported" | "context" };
 
 export type ProjectMedia = {
   src: string;
@@ -47,6 +47,7 @@ export const profile = {
   phoneHref: "+18322067952",
   linkedin: "https://www.linkedin.com/in/tvmquan",
   profileImage: withBasePath("/profile/quan-tran-headshot.webp") as string | null,
+  profileImageSrcSet: `${withBasePath("/profile/quan-tran-headshot-400.webp")} 400w, ${withBasePath("/profile/quan-tran-headshot-800.webp")} 800w`,
   resume: withBasePath("/resume/quan-tran-resume.pdf"),
 };
 
@@ -64,10 +65,10 @@ export const projects: Project[] = [
     tools: ["Parametric CAD", "DXF", "Laser cutting", "Test logs"],
     summary: "A mechanically validated enclosure designed around repeatable access, parcel fit, and reliable sensor behavior.",
     metrics: [
-      { value: "600", label: "Latch cycles" },
-      { value: "60 N", label: "Retention" },
-      { value: "1 m", label: "Drop / 5 kg" },
-      { value: "<2%", label: "False triggers" },
+      { value: "600", label: "Latch cycles tested", kind: "test" },
+      { value: "60 N", label: "Retention test load", kind: "test" },
+      { value: "1 m", label: "Drop height · 5 kg payload", kind: "test" },
+      { value: "<2%", label: "Reported false-trigger rate", kind: "reported" },
     ],
     sections: [
       {
@@ -110,10 +111,10 @@ export const projects: Project[] = [
     tools: ["Verification matrix", "Decision matrix", "3D printing"],
     summary: "A drone-enabled medical supply hub concept developed from measurable requirements through prototype validation.",
     metrics: [
-      { value: "7", label: "Requirements" },
-      { value: "4", label: "Team members" },
-      { value: "3 ft", label: "Drop test" },
-      { value: "5 lb", label: "Load test" },
+      { value: "7", label: "Requirements defined", kind: "context" },
+      { value: "4", label: "Team members", kind: "context" },
+      { value: "3 ft", label: "Prototype drop-test height", kind: "test" },
+      { value: "5 lb", label: "Prototype test load", kind: "test" },
     ],
     sections: [
       {
@@ -154,10 +155,10 @@ export const projects: Project[] = [
     tools: ["AutoCAD", "SolidWorks Simulation", "Revision control"],
     summary: "Manufacturing drawings and simulation support connected to trial-run observations and structural updates.",
     metrics: [
-      { value: "40%", label: "Fewer performance issues" },
-      { value: "15", label: "Judges" },
-      { value: "400+", label: "Audience" },
-      { value: "FEA", label: "Simulation support" },
+      { value: "40%", label: "Reported issue reduction*", kind: "reported" },
+      { value: "15", label: "Presentation judges", kind: "context" },
+      { value: "400+", label: "Presentation audience", kind: "context" },
+      { value: "FEA", label: "Structural analysis support", kind: "context" },
     ],
     sections: [
       {
@@ -199,9 +200,9 @@ export const projects: Project[] = [
     tools: ["SolidWorks", "SolidWorks Simulation", "Iterative load testing"],
     summary: "A first-prize bridge developed through structural simulation, physical load testing, and team-led design iteration.",
     metrics: [
-      { value: "120 kg", label: "Load capacity" },
-      { value: "+25%", label: "Above average" },
-      { value: "1st", label: "Among 100+ teams" },
+      { value: "120 kg", label: "Reported supported mass*", kind: "reported" },
+      { value: "+25%", label: "Reported vs. competition average*", kind: "reported" },
+      { value: "1st", label: "Place among 100+ teams", kind: "context" },
       { value: "800+", label: "Presentation audience" },
     ],
     sections: [
@@ -217,8 +218,8 @@ export const projects: Project[] = [
         id: "testing",
         eyebrow: "02 / Testing",
         title: "Iterate against measured structural performance.",
-        body: "The five-member team repeated build and load-test cycles until the bridge reached a verified 120 kg capacity, 25% above the competition average.",
-        bullets: ["Five-person team led from design through validation", "120 kg verified load capacity", "Performance measured through iterative stress and load testing"],
+        body: "The five-member team repeated build and load-test cycles until the bridge reportedly supported a 120 kg load, 25% above the competition average.",
+        bullets: ["Five-person team led from design through validation", "120 kg reported supported mass", "Performance measured through iterative stress and load testing"],
         mediaLabel: "LOAD TEST",
         mediaHint: "Physical bridge test media required",
       },
@@ -289,17 +290,22 @@ export const projects: Project[] = [
 ];
 
 export const skillGroups = [
-  { label: "Design", skills: ["SolidWorks / CSWP", "Siemens NX", "AutoCAD", "GD&T", "Tolerance analysis"] },
-  { label: "Simulation & Analysis", skills: ["SolidWorks Simulation / FEA", "MATLAB", "Python", "Measurement data analysis"] },
-  { label: "Validation", skills: ["Automotive connector validation", "Mechanical / electrical testing", "Chamber testing", "Fixture setup", "Test plan interpretation", "Pass / fail reporting", "Failure mode documentation"] },
-  { label: "Fabrication", skills: ["3D printing", "Laser cutting", "Welding", "Soldering", "Drilling"] },
-  { label: "Programming & Data", skills: ["Python", "MATLAB", "LabVIEW", "ESP32 data logging", "Microsoft Office / MOS"] },
+  {label:"Design",skills:["SolidWorks / CSWP", "Siemens NX", "AutoCAD", "GD&T", "Tolerance analysis"],links:[["SolidWorks · Bridge design","/projects/bridge-building-competition/#engineering-process"],["AutoCAD · F-Race drawings","/projects/f-race/#engineering-process"]]},
+  {label:"Simulation & analysis",skills:["SolidWorks Simulation / FEA", "MATLAB", "Python", "Measurement data analysis"],links:[["FEA · Bridge analysis","/projects/bridge-building-competition/#engineering-process"],["Simulation support · F-Race","/projects/f-race/#my-role"]]},
+  {label:"Test & validation",skills:["Mechanical testing", "Electrical testing", "Chamber testing", "Fixture design / setup", "Test-plan interpretation", "Pass/fail reporting", "Failure-mode documentation"],links:[["Connector validation · Bosch","/#experience"],["Mechanical testing · Delivery Box","/projects/smart-delivery-box/#validation"]]},
+  {label:"Prototyping & manufacturing",skills:["3D printing", "Laser cutting", "Drilling", "Welding", "Soldering"],links:[["Laser cutting · Delivery Box","/projects/smart-delivery-box/#build"],["3D printing · Health Supply Network","/projects/hybrid-health-supply-network/#build"]]},
+  {label:"Embedded & data acquisition",skills:["ESP32", "Sensors", "Data logging", "LabVIEW", "Microsoft Office / MOS"],links:[]},
 ];
 
 export const boschMetrics: Metric[] = [
-  { value: "5+", label: "Validation procedures" },
-  { value: "300+", label: "Connector samples" },
-  { value: "6+", label: "Validation programs" },
-  { value: "15+", label: "Pass / fail reports" },
+  { value: "5+", label: "Validation procedures conducted" },
+  { value: "300+", label: "Connector specimens prepared / tested" },
+  { value: "6+", label: "Validation programs supported" },
+  { value: "40+", label: "Pass / fail reports supported" },
 ];
 
+
+// Stable project numbers preserve existing references; display order reflects relevance.
+export const featuredProjects = projects.slice(0, 2);
+export const supportingProjects = [projects[3], projects[2]];
+export const archiveProjects = projects.slice(4);

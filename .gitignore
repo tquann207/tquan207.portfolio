@@ -1,0 +1,12 @@
+node_modules/
+.next/
+out/
+dist/
+.sites-runtime/
+.wrangler/
+next-env.d.ts
+*.tsbuildinfo
+public/__qa.html
+public/__baseline/
+.env*
+!.env.example

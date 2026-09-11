@@ -1,179 +1,22 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import { MediaPlaceholder } from "./media-placeholder";
+import { useRef, useState } from "react";
 
-export type ProjectMediaSlide = {
-  src?: string;
-  alt: string;
-  label: string;
-  hint?: string;
-};
+export type ProjectMediaSlide = { src?: string; alt: string; label: string; hint?: string };
 
-type ProjectMediaSliderProps = {
-  slides: ProjectMediaSlide[];
-  projectNumber: string;
-  intervalMs?: number;
-};
-
-export function ProjectMediaSlider({
-  slides,
-  projectNumber,
-  intervalMs = 2000,
-}: ProjectMediaSliderProps) {
-  const safeSlides =
-    slides.length > 0
-      ? slides
-      : [
-          {
-            alt: `Project ${projectNumber} media placeholder`,
-            label: "PROJECT MEDIA",
-            hint: "IMAGE PLACEHOLDER",
-          },
-        ];
-
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [reduceMotion, setReduceMotion] = useState<boolean | null>(null);
-  const touchStartX = useRef<number | null>(null);
-
-  useEffect(() => {
-    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const updatePreference = () => setReduceMotion(mediaQuery.matches);
-
-    updatePreference();
-    mediaQuery.addEventListener?.("change", updatePreference);
-
-    return () => {
-      mediaQuery.removeEventListener?.("change", updatePreference);
-    };
-  }, []);
-
-  useEffect(() => {
-    if (safeSlides.length <= 1 || reduceMotion !== false) return;
-
-    const timer = window.setTimeout(() => {
-      setActiveIndex((current) => (current + 1) % safeSlides.length);
-    }, intervalMs);
-
-    return () => {
-      window.clearTimeout(timer);
-    };
-  }, [activeIndex, intervalMs, reduceMotion, safeSlides.length]);
-
-  useEffect(() => {
-    if (activeIndex >= safeSlides.length) {
-      setActiveIndex(0);
-    }
-  }, [activeIndex, safeSlides.length]);
-
-  const goTo = (index: number) => {
-    const nextIndex = (index + safeSlides.length) % safeSlides.length;
-    setActiveIndex(nextIndex);
-  };
-
-  const previous = () => goTo(activeIndex - 1);
-  const next = () => goTo(activeIndex + 1);
-
-  const handleTouchStart = (event: React.TouchEvent<HTMLDivElement>) => {
-    touchStartX.current = event.touches[0]?.clientX ?? null;
-  };
-
-  const handleTouchEnd = (event: React.TouchEvent<HTMLDivElement>) => {
-    if (touchStartX.current === null) return;
-
-    const endX = event.changedTouches[0]?.clientX ?? touchStartX.current;
-    const distance = endX - touchStartX.current;
-    touchStartX.current = null;
-
-    if (Math.abs(distance) < 50) return;
-
-    if (distance > 0) {
-      previous();
-    } else {
-      next();
-    }
-  };
-
-  const hasMultipleSlides = safeSlides.length > 1;
-
-  return (
-    <div className="project-slider">
-      <div
-        className="project-slider__frame"
-        onTouchStart={handleTouchStart}
-        onTouchEnd={handleTouchEnd}
-      >
-        <div className="project-slider__slides">
-          {safeSlides.map((slide, index) => {
-            const isActive = index === activeIndex;
-
-            return (
-              <div
-                className={`project-slider__slide${
-                  isActive ? " project-slider__slide--active" : ""
-                }`}
-                aria-hidden={!isActive}
-                key={`${slide.label}-${index}`}
-              >
-                {slide.src ? (
-                  <img src={slide.src} alt={slide.alt} />
-                ) : (
-                  <MediaPlaceholder
-                    className="project-slider__placeholder"
-                    label={slide.label}
-                    hint={slide.hint}
-                    project={`PROJECT / ${projectNumber}`}
-                  />
-                )}
-              </div>
-            );
-          })}
-        </div>
-
-        {hasMultipleSlides ? (
-          <div className="project-slider__arrows" aria-label="Project image controls">
-            <button
-              type="button"
-              onClick={previous}
-              aria-label="Previous project image"
-            >
-              ←
-            </button>
-            <button
-              type="button"
-              onClick={next}
-              aria-label="Next project image"
-            >
-              →
-            </button>
-          </div>
-        ) : null}
-      </div>
-
-      <div className="project-slider__footer">
-        <div className="project-slider__caption">
-          <span>
-            IMAGE {String(activeIndex + 1).padStart(2, "0")} /{" "}
-            {String(safeSlides.length).padStart(2, "0")}
-          </span>
-          <strong>PROJECT MEDIA</strong>
-        </div>
-
-        {hasMultipleSlides ? (
-          <div className="project-slider__dots" aria-label="Choose project image">
-            {safeSlides.map((_, index) => (
-              <button
-                type="button"
-                className={index === activeIndex ? "is-active" : ""}
-                onClick={() => goTo(index)}
-                aria-label={`Show project image ${index + 1}`}
-                aria-current={index === activeIndex ? "true" : undefined}
-                key={`project-media-dot-${index}`}
-              />
-            ))}
-          </div>
-        ) : null}
-      </div>
-    </div>
-  );
+export function ProjectMediaSlider({ slides, projectNumber }: { slides: ProjectMediaSlide[]; projectNumber: string; intervalMs?: number }) {
+  const images = slides.filter((slide): slide is ProjectMediaSlide & { src: string } => Boolean(slide.src));
+  const [index, setIndex] = useState(0);
+  const touch = useRef<{x:number;y:number} | null>(null);
+  if (!images.length) return null;
+  const activeIndex = index % images.length;
+  const active = images[activeIndex];
+  const move = (amount:number) => setIndex((value) => (value + amount + images.length) % images.length);
+  return <figure className="project-slider" aria-label={`Project ${projectNumber} images`}>
+    <div className="project-slider__frame" onTouchStart={e => { const t = e.touches[0]; if(t) touch.current = {x:t.clientX,y:t.clientY}; }} onTouchEnd={e => {
+      const t = e.changedTouches[0]; if(t && touch.current){const dx=t.clientX-touch.current.x,dy=t.clientY-touch.current.y;if(Math.abs(dx)>50 && Math.abs(dx)>Math.abs(dy))move(dx<0?1:-1);} touch.current=null;
+    }}><img src={active.src} alt={active.alt} width="1200" height="900" decoding="async" /></div>
+    {images.length > 1 && <div className="project-slider__choices" role="group" aria-label="Choose project image">{images.map((slide, i) => <button key={`${slide.src}-${i}`} type="button" aria-label={`Show project image ${i + 1}`} aria-current={i === activeIndex ? "true" : undefined} onClick={() => setIndex(i)}>{String(i + 1).padStart(2,"0")}</button>)}</div>}
+    <figcaption><div aria-live="polite" aria-atomic="true"><span>FIG. {projectNumber} / {activeIndex + 1} OF {images.length}</span><strong>{active.label}</strong></div>{images.length > 1 && <div className="project-slider__controls"><button type="button" onClick={() => move(-1)} aria-label="Previous project image">←</button><button type="button" onClick={() => move(1)} aria-label="Next project image">→</button></div>}</figcaption>
+  </figure>;
 }

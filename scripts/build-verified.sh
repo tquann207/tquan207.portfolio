@@ -1,6 +1,11 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+# The public GitHub checkout is a static export and has no Sites manifest.
+if [[ ! -f .openai/hosting.json ]]; then
+  exec npm run build:github
+fi
+
 script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 if [[ "${SITES_ENV_READY:-}" != "1" ]]; then

@@ -1,171 +1,55 @@
 import Link from "next/link";
-import type { Project } from "@/content/site";
-import { projects } from "@/content/site";
+import { projects, type Project } from "@/content/site";
+import { getCaseDetails } from "@/content/case-studies";
+import { withBasePath } from "@/content/site-config";
 import { Footer } from "./footer";
 import { Navbar } from "./navbar";
-import { ProjectMediaSlider, type ProjectMediaSlide } from "./project-media-slider";
-import { Reveal } from "./reveal";
+import { ProjectEvidence } from "./project-evidence";
+import { ProjectMediaSlider } from "./project-media-slider";
 import { TechnicalLabel } from "./technical-label";
 
+const sections = [
+  ["problem", "Problem"], ["requirements", "Requirements"], ["my-role", "My role"],
+  ["engineering-process", "Engineering process"], ["design-decisions", "Design decisions"],
+  ["build", "Build"], ["validation", "Validation"], ["results", "Results"],
+  ["iteration", "Failure / iteration"], ["takeaway", "Engineering takeaway"],
+];
+
 export function ProjectCaseStudy({ project }: { project: Project }) {
-  const currentIndex = projects.findIndex((item) => item.slug === project.slug);
-  const next = projects[(currentIndex + 1) % projects.length];
-  const stepCount = Math.min(Math.max(project.sections.length, 1), 3);
-
-  const mediaSlides: ProjectMediaSlide[] = project.media?.length
-    ? project.media.map((media) => ({
-        src: media.src,
-        alt: media.alt,
-        label: "PROJECT MEDIA",
-      }))
-    : project.sections.map((_, index) => ({
-        alt: `${project.title} project image ${index + 1}`,
-        label: "PROJECT MEDIA",
-        hint: "IMAGE PLACEHOLDER",
-      }));
-
-  return (
-    <>
-      <Navbar />
-
-      <main className="case-study">
-        <header className="case-hero site-shell">
-          <div className="case-hero__topline">
-            <TechnicalLabel>PROJECT / {project.number}</TechnicalLabel>
-            <Link className="case-back" href="/projects">
-              <span aria-hidden="true">←</span> All projects
-            </Link>
-          </div>
-
-          <h1>{project.title}</h1>
-
-          <div className="case-categories">
-            {project.categories.map((category) => (
-              <span key={category}>{category}</span>
-            ))}
-          </div>
-
-          <dl className="case-metadata">
-            <div>
-              <dt>Role</dt>
-              <dd>{project.role}</dd>
-            </div>
-
-            {project.teamSize ? (
-              <div>
-                <dt>Team</dt>
-                <dd>{project.teamSize}</dd>
-              </div>
-            ) : null}
-
-            <div>
-              <dt>Timeline</dt>
-              <dd>{project.timeline}</dd>
-            </div>
-
-            <div>
-              <dt>Location</dt>
-              <dd>{project.location}</dd>
-            </div>
-          </dl>
-        </header>
-
-        <section
-          className="site-shell case-media"
-          aria-labelledby={`project-${project.number}-media`}
-        >
-          <div className="case-section-heading">
-            <TechnicalLabel>PROJECT MEDIA / {project.number}</TechnicalLabel>
-            <span id={`project-${project.number}-media`}>
-              All project images in one frame
-            </span>
-          </div>
-
-          <ProjectMediaSlider
-            slides={mediaSlides}
-            projectNumber={project.number}
-          />
-        </section>
-
-        <section
-          className="site-shell case-approach"
-          aria-labelledby={`project-${project.number}-approach`}
-        >
-          <div className="case-approach__top">
-            <Reveal className="case-approach__intro">
-              <TechnicalLabel>ENGINEERING APPROACH</TechnicalLabel>
-              <h2 id={`project-${project.number}-approach`}>
-                From concept to engineering outcome.
-              </h2>
-              <p>{project.summary}</p>
-            </Reveal>
-
-            <div className="case-approach__panel">
-              <div
-                className={`case-approach__steps case-approach__steps--${stepCount}`}
-              >
-                {project.sections.map((section, index) => (
-                  <Reveal
-                    className="case-approach__step"
-                    delay={index * 70}
-                    key={section.id}
-                  >
-                    <section id={section.id}>
-                      <TechnicalLabel>{section.eyebrow}</TechnicalLabel>
-                      <h3>{section.title}</h3>
-                      <p>{section.body}</p>
-
-                      {section.bullets?.length ? (
-                        <ul>
-                          {section.bullets.map((bullet) => (
-                            <li key={bullet}>{bullet}</li>
-                          ))}
-                        </ul>
-                      ) : null}
-                    </section>
-                  </Reveal>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          <div className="case-results-band">
-            <div className="case-results-band__heading">
-              <TechnicalLabel>KEY RESULTS</TechnicalLabel>
-              <span>Measured project outcomes</span>
-            </div>
-
-            <div className="case-results-band__metrics">
-              {project.metrics.map((metric) => (
-                <div
-                  className="case-results-band__metric"
-                  key={`${metric.value}-${metric.label}`}
-                >
-                  <strong>{metric.value}</strong>
-                  <span>{metric.label}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section className="site-shell case-tools">
-          <TechnicalLabel>TOOLS / METHODS</TechnicalLabel>
-          <div>
-            {project.tools.map((tool) => (
-              <span key={tool}>{tool}</span>
-            ))}
-          </div>
-        </section>
-
-        <Link className="next-project" href={`/projects/${next.slug}`}>
-          <span>NEXT PROJECT / {next.number}</span>
-          <strong>{next.title}</strong>
-          <span aria-hidden="true">→</span>
-        </Link>
-      </main>
-
-      <Footer />
-    </>
-  );
+  const detail = getCaseDetails(project);
+  const next = projects[(projects.findIndex(p => p.slug === project.slug) + 1) % projects.length];
+  const media = project.media?.filter(item => item.src) ?? [];
+  const text: Record<string, string | undefined> = detail ? {
+    problem: detail.problem,
+    "my-role": detail.ownership,
+    "design-decisions": detail.decisions,
+    build: detail.build,
+    validation: detail.validation,
+    iteration: detail.iteration,
+    takeaway: detail.takeaway,
+  } : {};
+  return <><Navbar /><main id="main-content" className="case-study" tabIndex={-1}>
+    <header className="case-hero site-shell">
+      <div className="case-hero__topline"><TechnicalLabel>{detail ? "ENGINEERING CASE STUDY" : "COMPETITION RECORD"} / {project.number}</TechnicalLabel><Link className="text-link" href="/projects/">← All projects</Link></div>
+      <h1>{project.title}</h1><p className="case-summary">{project.summary}</p>
+      <div className="project-categories">{project.categories.map(c => <span key={c}>{c}</span>)}</div>
+      <dl className="case-metadata"><div><dt>My role</dt><dd>{project.role}</dd></div>{project.teamSize && <div><dt>Team</dt><dd>{project.teamSize}</dd></div>}<div><dt>Timeline</dt><dd>{project.timeline}</dd></div><div><dt>Location</dt><dd>{project.location}</dd></div></dl>
+    </header>
+    {media.length > 0 && <section className="case-media site-shell" aria-label="Project images"><ProjectMediaSlider projectNumber={project.number} slides={media.map(item => ({src:withBasePath(item.src),alt:item.alt,label:item.label ?? project.title}))} /></section>}
+    {detail ? <div className="case-layout site-shell">
+      <details className="case-mobile-index"><summary>Contents · 10 sections</summary><nav aria-label="Case study sections (mobile)">{sections.map(([id,label],i) => <a href={`#${id}`} key={id}><span>{String(i + 1).padStart(2,"0")}</span>{label}</a>)}</nav></details>
+      <nav className="case-index" aria-label="Case study sections"><span className="technical-label">CONTENTS / 10</span>{sections.map(([id,label],i) => <a href={`#${id}`} key={id}><span>{String(i + 1).padStart(2,"0")}</span>{label}</a>)}</nav>
+      <div className="case-sections">{sections.map(([id,label],i) => <section id={id} key={id} className="case-section" aria-labelledby={`title-${id}`}>
+        <TechnicalLabel>{String(i + 1).padStart(2,"0")} / {label}</TechnicalLabel><h2 id={`title-${id}`}>{label}</h2>
+        {text[id] && <p id={id === "problem" && project.sections.some(s => s.id === "challenge") ? "challenge" : undefined}>{text[id]}</p>}
+        {id === "requirements" && <ProjectEvidence project={project} />}
+        {id === "engineering-process" && <div className="case-process">{project.sections.filter(s => s.id !== "result" && s.id !== "challenge").map(s => <div id={sections.some(([id]) => id === s.id) ? undefined : s.id} key={s.id}><h3>{s.title}</h3><p>{s.body}</p>{s.bullets && <ul>{s.bullets.map(b => <li key={b}>{b}</li>)}</ul>}</div>)}</div>}
+        {id === "results" && <><dl className="metric-grid">{project.metrics.map(m => <div className="metric" key={m.label}><dt>{m.label}</dt><dd>{m.value}</dd><span>{m.kind === "test" ? "Test scope" : m.kind === "reported" ? "Reported result" : "Project context"}</span></div>)}</dl>{project.sections.filter(s => s.id === "result").map(s => <p key={s.id}>{s.body}</p>)}<p className="documentation-note">{detail.resultNote}</p></>}
+        {id === "my-role" && <p className="documentation-note">Ownership summary follows the current project record and downloadable résumé. Annotated artifacts should identify the parts and decisions I owned alongside teammates’ deliverables.</p>}
+        {id === "takeaway" && <details className="evidence-needed"><summary>Supporting evidence to add</summary><ul>{detail.evidence.map(item => <li key={item}>{item}</li>)}</ul></details>}
+      </section>)}</div>
+    </div> : <div className="site-shell archive-record"><h2>Competition record</h2>{project.sections.map(s => <p id={s.id} key={s.id}>{s.body}</p>)}<dl className="case-metadata">{project.metrics.map(m => <div key={m.label}><dt>{m.label}</dt><dd>{m.value}</dd></div>)}</dl><p className="documentation-note">Design requirements, individual contributions, build records, and test evidence have not yet been provided. This page preserves the existing competition record.</p></div>}
+    <section className="site-shell case-tools" aria-label="Tools and methods"><TechnicalLabel>TOOLS / METHODS</TechnicalLabel><div>{project.tools.map(tool => <span key={tool}>{tool}</span>)}</div></section>
+    <div className="site-shell"><Link className="next-project" href={`/projects/${next.slug}/`}><span>NEXT PROJECT / {next.number}</span><strong>{next.title}</strong><span aria-hidden="true">→</span></Link></div>
+  </main><Footer /></>;
 }

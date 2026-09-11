@@ -12,14 +12,14 @@ export function PortfolioHome() {
   return (
     <>
       <Navbar />
-      <main>
+      <main id="main-content" tabIndex={-1}>
         <Hero />
         <Experience />
         <ProjectOverview />
         <EngineeringProcess />
         <Capabilities />
-        <About />
         <Leadership />
+        <About />
       </main>
       <Footer />
     </>

@@ -1,25 +1,13 @@
+import Link from "next/link";
 import { skillGroups } from "@/content/site";
-import { Reveal } from "./reveal";
 import { TechnicalLabel } from "./technical-label";
 
+
+
 export function Capabilities() {
-  return (
-    <section className="capabilities-section" aria-labelledby="capabilities-title">
-      <div className="site-shell">
-        <Reveal className="capabilities-intro">
-          <TechnicalLabel>TECHNICAL CAPABILITIES / VERIFIED</TechnicalLabel>
-          <h2 id="capabilities-title">Tools organized by what they help me do.</h2>
-        </Reveal>
-        <div className="skill-groups">
-          {skillGroups.map((group, index) => (
-            <Reveal className="skill-group" delay={index * 45} key={group.label}>
-              <span>{String(index + 1).padStart(2, "0")}</span>
-              <h3>{group.label}</h3>
-              <ul>{group.skills.map((skill) => <li key={skill}>{skill}</li>)}</ul>
-            </Reveal>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
+  return <section className="capabilities-section section-space" aria-labelledby="capabilities-title"><div className="site-shell">
+    <div className="section-heading"><TechnicalLabel>TECHNICAL CAPABILITIES</TechnicalLabel><h2 id="capabilities-title">Tools connected<br />to engineering work.</h2></div>
+    <div className="skill-groups">{skillGroups.map((group,i) => <div className="skill-group" key={group.label}><span className="technical-label">{String(i+1).padStart(2,"0")}</span><h3>{group.label}</h3><div><ul>{group.skills.map(skill => <li key={skill}>{skill}</li>)}</ul><div className="skill-evidence">{group.links.map(([label,href]) => <Link href={href} key={label}>{label} <span aria-hidden="true">↗</span></Link>)}{!group.links.length && <p>Project-specific implementation evidence to add.</p>}</div></div></div>)}</div>
+    <p className="figure-note">Project links identify documented uses. Other listed tools still need a project example; no proficiency percentages are implied.</p>
+  </div></section>;
 }
