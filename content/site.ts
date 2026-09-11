@@ -30,6 +30,11 @@ export type Project = {
   categories: string[];
   tools: string[];
   summary: string;
+  overview: {
+    year: string;
+    category: string;
+    highlight: Metric;
+  };
   metrics: Metric[];
   media?: ProjectMedia[];
   sections: ProjectSection[];
@@ -57,6 +62,7 @@ export const projects: Project[] = [
     number: "01",
     title: "Smart Delivery Box",
     shortTitle: "Delivery Box",
+    overview: { year: "2026", category: "Mechanical Design", highlight: { value: "600 cycles", label: "Latch cycling tested", kind: "test" } },
     role: "Mechanical Lead",
     timeline: "Feb 2026 — Present",
     location: "Cincinnati, Ohio",
@@ -103,6 +109,7 @@ export const projects: Project[] = [
     number: "02",
     title: "Hybrid Health Supply Network",
     shortTitle: "Health Supply Network",
+    overview: { year: "2025", category: "Product Development", highlight: { value: "7 requirements", label: "Measurable design requirements", kind: "context" } },
     role: "Project Lead, Mechanical Design",
     timeline: "Aug 2025 — Dec 2025",
     location: "Cincinnati, Ohio",
@@ -148,6 +155,7 @@ export const projects: Project[] = [
     number: "03",
     title: "F-Race STEM Competition",
     shortTitle: "F-Race",
+    overview: { year: "2024", category: "Design & Analysis", highlight: { value: "AutoCAD", label: "Part & assembly drawings", kind: "context" } },
     role: "Mechanical Design Contributor",
     timeline: "Sep 2024 — Oct 2024",
     location: "Ho Chi Minh City, Vietnam",
@@ -192,6 +200,7 @@ export const projects: Project[] = [
     number: "04",
     title: "Bridge Building Competition",
     shortTitle: "Bridge Building",
+    overview: { year: "2023", category: "Structural Design", highlight: { value: "120 kg", label: "Reported supported mass", kind: "reported" } },
     role: "Team Leader",
     timeline: "Mar 2023 — Apr 2023",
     location: "Ho Chi Minh City, Vietnam",
@@ -238,6 +247,7 @@ export const projects: Project[] = [
     number: "05",
     title: "Water Jet Car Competition",
     shortTitle: "Water Jet Car",
+    overview: { year: "2022", category: "STEM Competition", highlight: { value: "Top 4", label: "Competition result", kind: "context" } },
     role: "STEM Club Competition Team",
     timeline: "2022",
     location: "Ho Chi Minh City, Vietnam",
@@ -265,6 +275,7 @@ export const projects: Project[] = [
     number: "06",
     title: "City-Level Water Rocket",
     shortTitle: "Water Rocket",
+    overview: { year: "2021", category: "STEM Competition", highlight: { value: "Top 8", label: "Competition result", kind: "context" } },
     role: "STEM Club Competition Team",
     timeline: "2021",
     location: "Ho Chi Minh City, Vietnam",
