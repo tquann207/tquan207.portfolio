@@ -52,6 +52,6 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
       </section>)}</div>
     </div> : <div className="site-shell archive-record"><h2>Competition record</h2>{project.sections.map(s => <p id={s.id} key={s.id}>{s.body}</p>)}<dl className="case-metadata">{project.metrics.map(m => <div key={m.label}><dt>{m.label}</dt><dd>{m.value}</dd></div>)}</dl><p className="documentation-note">Design requirements, individual contributions, build records, and test evidence have not yet been provided. This page preserves the existing competition record.</p></div>}
     <section className="site-shell case-tools" aria-label="Tools and methods"><TechnicalLabel>TOOLS / METHODS</TechnicalLabel><div>{project.tools.map(tool => <span key={tool}>{tool}</span>)}</div></section>
-    <div className="site-shell"><div className="project-return-bottom"><ProjectReturnLink /></div><Link className="next-project" href={`/projects/${next.slug}/`}><span>NEXT PROJECT / {next.number}</span><strong>{next.title}</strong><span aria-hidden="true"><ActionIcon name="next" /></span></Link></div>
+    <div className="site-shell"><div className="project-return-bottom"><ProjectReturnLink id="project-return-bottom-link" /></div><Link className="next-project" href={`/projects/${next.slug}/`}><span>NEXT PROJECT / {next.number}</span><strong>{next.title}</strong><span aria-hidden="true"><ActionIcon name="next" /></span></Link></div>
   </main><Footer /></>;
 }
