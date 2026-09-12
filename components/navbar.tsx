@@ -2,10 +2,9 @@
 
 import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
-import { profile } from "@/content/site";
 import { withBasePath } from "@/content/site-config";
 
-const links = [["Experience", withBasePath("/#experience")], ["Projects", withBasePath("/#projects")], ["About", withBasePath("/#about")], ["Resume", profile.resume], ["Contact", withBasePath("/#contact")]];
+const links = [["Experience", withBasePath("/#experience")], ["Projects", withBasePath("/#projects")], ["About", withBasePath("/#about")], ["Contact", withBasePath("/#contact")]];
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
