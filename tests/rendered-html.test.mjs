@@ -63,8 +63,9 @@ test("project navigation follows the homepage order and always offers a return",
   }
   for (const html of details) {
     const returnLinks = [...html.matchAll(/<a\b[^>]*class="[^"]*\bproject-return-link\b[^"]*"[^>]*href="([^"]+)"[^>]*>/g)];
-    assert.equal(returnLinks.length, 2, "Detail pages provide top and bottom return links");
-    assert.ok(returnLinks.every(link => link[1] === `${base}/#projects`), "Both return links lead directly to the homepage project section");
+    assert.equal(returnLinks.length, 1, "Each detail page provides exactly one return control");
+    assert.equal(returnLinks[0][1], `${base}/#projects`, "Return link leads directly to the homepage project section");
+    assert.ok(!html.includes("project-return-bottom"), "No duplicate bottom return control remains");
     assert.ok(html.includes('class="next-project"'), "Continue-to-next-project navigation remains available");
   }
 });
