@@ -45,7 +45,7 @@ test("project navigation follows the homepage order and always offers a return",
   const details = readdirSync(join(root, "projects"), { withFileTypes: true })
     .filter(entry => entry.isDirectory() && existsSync(join(root, "projects", entry.name, "index.html")))
     .map(entry => readFileSync(join(root, "projects", entry.name, "index.html"), "utf8"));
-  assert.equal(details.length, 6, "All six detail pages remain available");
+  assert.equal(details.length, 7, "All seven detail pages remain available");
   assert.ok(home.indexOf('id="experience"') < home.indexOf('id="projects"'));
   assert.ok(home.indexOf('id="projects"') < home.indexOf('id="about"'));
   for (const html of [home, archive, ...details]) {
@@ -78,6 +78,7 @@ test("GitHub Pages export preserves local routes, files, and fragment targets", 
   assert.ok(!htmlFiles.some(path => path.includes("__qa") || path.includes("__baseline")), "QA fixtures must not ship");
   for (const path of htmlFiles) {
     const html = readFileSync(join(root, path), "utf8");
+    assert.doesNotMatch(html, /[←→↗↘↓↑]/u, `${path}: use action icons instead of arrow characters`);
     assert.equal((html.match(/<h1\b/g) ?? []).length, 1, `${path}: one page heading`);
     const ids = [...html.matchAll(/\bid="([^"]+)"/g)].map(m => m[1]);
     assert.equal(new Set(ids).size, ids.length, `${path}: duplicate IDs`);
@@ -95,4 +96,23 @@ test("GitHub Pages export preserves local routes, files, and fragment targets", 
       }
     }
   }
+});
+
+test("NVH is discoverable from projects and embedded skills with résumé-backed details", { skip: !standalone }, () => {
+  const root = fileURLToPath(new URL("../out/", import.meta.url));
+  const home = readFileSync(join(root, "index.html"), "utf8");
+  const archive = readFileSync(join(root, "projects/index.html"), "utf8");
+  const detail = readFileSync(join(root, "projects/nvh-test-rig/index.html"), "utf8");
+  for (const html of [home, archive]) {
+    assert.equal((html.match(/class="project-folio"/g) ?? []).length, 7);
+    assert.ok(html.indexOf('id="smart-delivery-box"') < html.indexOf('id="nvh-test-rig"'));
+    assert.ok(html.indexOf('id="nvh-test-rig"') < html.indexOf('id="hybrid-health-supply-network"'));
+    assert.ok(html.includes('href="/tquan207.portfolio/projects/nvh-test-rig/"'));
+  }
+  const capabilities = home.match(/<section\b[^>]*class="capabilities-section[^>]*>[\s\S]*?<\/section>/)?.[0];
+  assert.ok(capabilities?.includes('href="/tquan207.portfolio/projects/nvh-test-rig/#data-acquisition"'));
+  assert.ok(capabilities.includes('href="/tquan207.portfolio/projects/nvh-test-rig/#signal-analysis"'));
+  assert.ok(!capabilities.includes("Project-specific implementation evidence to add."));
+  for (const text of ["Personal Project", "Jan 2026", "ESP32", "ADXL345", "Hall sensor", "FFT", 'id="data-acquisition"', 'id="signal-analysis"']) assert.ok(detail.includes(text), text);
+  assert.ok(detail.includes("does not provide numerical isolation improvements"));
 });

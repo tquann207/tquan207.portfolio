@@ -1,3 +1,4 @@
+import { ActionIcon } from "./action-icon";
 import Link from "next/link";
 import { projects, type Project } from "@/content/site";
 import { TechnicalLabel } from "./technical-label";
@@ -25,7 +26,7 @@ function ProjectFolio({ project, headingLevel }: { project: Project; headingLeve
           <dd>{highlight.value}</dd>
         </dl>
         <span className="project-folio__open">
-          View project <span aria-hidden="true">↗</span>
+          View project <span aria-hidden="true"><ActionIcon name="document" /></span>
         </span>
       </Link>
     </article>

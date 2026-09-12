@@ -1,3 +1,4 @@
+import { ActionIcon } from "./action-icon";
 import Link from "next/link";
 import { TechnicalLabel } from "./technical-label";
 
@@ -17,7 +18,7 @@ export function EngineeringProcess() {
         <div className="section-heading"><TechnicalLabel>ENGINEERING PROCESS / 06 STAGES</TechnicalLabel><h2 id="process-title">From requirements<br />to the next revision.</h2></div>
         <ol className="process-grid">
           {stages.map(([name, detail, evidence, href], index) => <li key={name}>
-            <span className="process-number">{String(index + 1).padStart(2, "0")}</span><h3>{name}</h3><p>{detail}</p><Link href={href}>{evidence} <span aria-hidden="true">↗</span></Link>
+            <span className="process-number">{String(index + 1).padStart(2, "0")}</span><h3>{name}</h3><p>{detail}</p><Link href={href}>{evidence} <span aria-hidden="true"><ActionIcon name="link" /></span></Link>
           </li>)}
         </ol>
       </div>
