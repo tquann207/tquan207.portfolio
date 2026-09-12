@@ -8,7 +8,7 @@ import { withBasePath } from "@/content/site-config";
 export function ProjectReturnLink({ id }: { id?: string }) {
   return (
     <a className="project-return-link" href={withBasePath("/#projects")} id={id}>
-      <span aria-hidden="true"><ActionIcon name="home" /></span> Back to portfolio
+      <span aria-hidden="true"><ActionIcon name="home" /></span> Back to home
     </a>
   );
 }
@@ -35,7 +35,7 @@ export function ProjectReturnBar() {
   }, [pathname]);
 
   return (
-    <nav ref={bar} className="project-return-bar" aria-label="Return to portfolio" data-hidden={bottomVisible} aria-hidden={bottomVisible || undefined} inert={bottomVisible}>
+    <nav ref={bar} className="project-return-bar" aria-label="Return to home" data-hidden={bottomVisible} aria-hidden={bottomVisible || undefined} inert={bottomVisible}>
       <div className="site-shell"><ProjectReturnLink /></div>
     </nav>
   );

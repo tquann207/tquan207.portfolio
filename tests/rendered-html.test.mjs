@@ -59,7 +59,7 @@ test("project navigation follows the homepage order and always offers a return",
   for (const html of [archive, ...details]) {
     const bar = html.match(/<nav\b[^>]*class="project-return-bar"[^>]*>([\s\S]*?)<\/nav>/)?.[1];
     assert.ok(bar?.includes(`href="${base}/#projects"`), "Visible return link works without browser history or JavaScript");
-    assert.ok(bar.includes("Back to portfolio"));
+    assert.ok(bar.includes("Back to home"));
   }
   for (const html of details) {
     const returnLinks = [...html.matchAll(/<a\b[^>]*class="[^"]*\bproject-return-link\b[^"]*"[^>]*href="([^"]+)"[^>]*>/g)];
