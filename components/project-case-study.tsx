@@ -6,6 +6,7 @@ import { Footer } from "./footer";
 import { Navbar } from "./navbar";
 import { ProjectEvidence } from "./project-evidence";
 import { ProjectMediaSlider } from "./project-media-slider";
+import { ProjectReturnBar, ProjectReturnLink } from "./project-return";
 import { TechnicalLabel } from "./technical-label";
 
 const sections = [
@@ -28,9 +29,9 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
     iteration: detail.iteration,
     takeaway: detail.takeaway,
   } : {};
-  return <><Navbar /><main id="main-content" className="case-study" tabIndex={-1}>
+  return <><Navbar /><ProjectReturnBar /><main id="main-content" className="case-study" tabIndex={-1}>
     <header className="case-hero site-shell">
-      <div className="case-hero__topline"><TechnicalLabel>{detail ? "ENGINEERING CASE STUDY" : "COMPETITION RECORD"} / {project.number}</TechnicalLabel><Link className="text-link" href="/projects/">← All projects</Link></div>
+      <div className="case-hero__topline"><TechnicalLabel>{detail ? "ENGINEERING CASE STUDY" : "COMPETITION RECORD"} / {project.number}</TechnicalLabel></div>
       <h1>{project.title}</h1><p className="case-summary">{project.summary}</p>
       <div className="project-categories">{project.categories.map(c => <span key={c}>{c}</span>)}</div>
       <dl className="case-metadata"><div><dt>My role</dt><dd>{project.role}</dd></div>{project.teamSize && <div><dt>Team</dt><dd>{project.teamSize}</dd></div>}<div><dt>Timeline</dt><dd>{project.timeline}</dd></div><div><dt>Location</dt><dd>{project.location}</dd></div></dl>
@@ -50,6 +51,6 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
       </section>)}</div>
     </div> : <div className="site-shell archive-record"><h2>Competition record</h2>{project.sections.map(s => <p id={s.id} key={s.id}>{s.body}</p>)}<dl className="case-metadata">{project.metrics.map(m => <div key={m.label}><dt>{m.label}</dt><dd>{m.value}</dd></div>)}</dl><p className="documentation-note">Design requirements, individual contributions, build records, and test evidence have not yet been provided. This page preserves the existing competition record.</p></div>}
     <section className="site-shell case-tools" aria-label="Tools and methods"><TechnicalLabel>TOOLS / METHODS</TechnicalLabel><div>{project.tools.map(tool => <span key={tool}>{tool}</span>)}</div></section>
-    <div className="site-shell"><Link className="next-project" href={`/projects/${next.slug}/`}><span>NEXT PROJECT / {next.number}</span><strong>{next.title}</strong><span aria-hidden="true">→</span></Link></div>
+    <div className="site-shell"><div className="project-return-bottom"><ProjectReturnLink /></div><Link className="next-project" href={`/projects/${next.slug}/`}><span>NEXT PROJECT / {next.number}</span><strong>{next.title}</strong><span aria-hidden="true">→</span></Link></div>
   </main><Footer /></>;
 }
