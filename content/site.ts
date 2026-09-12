@@ -105,8 +105,32 @@ export const projects: Project[] = [
     ],
   },
   {
-    slug: "hybrid-health-supply-network",
+    slug: "nvh-test-rig",
     number: "02",
+    title: "NVH Test Rig",
+    shortTitle: "NVH Test Rig",
+    overview: { year: "2026", category: "Vibration & Data Acquisition", highlight: { value: "3 mount types", label: "Rigid, rubber & isolator comparison", kind: "context" } },
+    role: "Personal Project",
+    timeline: "Jan 2026 — Present",
+    location: "Ohio, United States",
+    categories: ["Vibration Testing", "Data Acquisition", "Signal Analysis"],
+    tools: ["ESP32", "ADXL345 / I2C", "Hall sensor / RPM", "RMS / peak", "FFT"],
+    summary: "A DC motor + ERW test rig comparing mount isolation through synchronized vibration and RPM measurements.",
+    metrics: [
+      { value: "3", label: "Mount types: rigid, rubber, isolator", kind: "context" },
+      { value: "ESP32", label: "Synchronized data acquisition", kind: "context" },
+      { value: "RMS / peak", label: "Vibration amplitude metrics", kind: "context" },
+      { value: "FFT", label: "Frequency-domain analysis", kind: "context" },
+    ],
+    sections: [
+      { id: "rig-design", eyebrow: "01 / Test rig", title: "Controlled excitation with interchangeable mounts.", body: "Engineered a DC motor + ERW validation rig with rigid, rubber, and isolator mounts to benchmark vibration isolation performance." },
+      { id: "data-acquisition", eyebrow: "02 / Data acquisition", title: "Time-aligned vibration and speed measurements.", body: "Integrated synchronized data acquisition on an ESP32 using an ADXL345 accelerometer over I2C and a Hall sensor for RPM measurement. This connects the captured vibration data to motor speed." },
+      { id: "signal-analysis", eyebrow: "03 / Signal analysis", title: "Compare vibration across speed and mounting conditions.", body: "Quantified vibration versus speed using RMS and peak metrics, together with FFT analysis, to compare the isolation effectiveness of the interchangeable mounts." },
+    ],
+  },
+  {
+    slug: "hybrid-health-supply-network",
+    number: "03",
     title: "Hybrid Health Supply Network",
     shortTitle: "Health Supply Network",
     overview: { year: "2025", category: "Product Development", highlight: { value: "7 requirements", label: "Measurable design requirements", kind: "context" } },
@@ -152,7 +176,7 @@ export const projects: Project[] = [
   },
   {
     slug: "f-race",
-    number: "03",
+    number: "04",
     title: "F-Race STEM Competition",
     shortTitle: "F-Race",
     overview: { year: "2024", category: "Design & Analysis", highlight: { value: "AutoCAD", label: "Part & assembly drawings", kind: "context" } },
@@ -197,7 +221,7 @@ export const projects: Project[] = [
   },
   {
     slug: "bridge-building-competition",
-    number: "04",
+    number: "05",
     title: "Bridge Building Competition",
     shortTitle: "Bridge Building",
     overview: { year: "2023", category: "Structural Design", highlight: { value: "120 kg", label: "Reported supported mass", kind: "reported" } },
@@ -244,7 +268,7 @@ export const projects: Project[] = [
   },
   {
     slug: "water-jet-car",
-    number: "05",
+    number: "06",
     title: "Water Jet Car Competition",
     shortTitle: "Water Jet Car",
     overview: { year: "2022", category: "STEM Competition", highlight: { value: "Top 4", label: "Competition result", kind: "context" } },
@@ -272,7 +296,7 @@ export const projects: Project[] = [
   },
   {
     slug: "city-level-water-rocket",
-    number: "06",
+    number: "07",
     title: "City-Level Water Rocket",
     shortTitle: "Water Rocket",
     overview: { year: "2021", category: "STEM Competition", highlight: { value: "Top 8", label: "Competition result", kind: "context" } },
@@ -305,7 +329,7 @@ export const skillGroups = [
   {label:"Simulation & analysis",skills:["SolidWorks Simulation / FEA", "MATLAB", "Python", "Measurement data analysis"],links:[["FEA · Bridge analysis","/projects/bridge-building-competition/#engineering-process"],["Simulation support · F-Race","/projects/f-race/#my-role"]]},
   {label:"Test & validation",skills:["Mechanical testing", "Electrical testing", "Chamber testing", "Fixture design / setup", "Test-plan interpretation", "Pass/fail reporting", "Failure-mode documentation"],links:[["Connector validation · Bosch","/#experience"],["Mechanical testing · Delivery Box","/projects/smart-delivery-box/#validation"]]},
   {label:"Prototyping & manufacturing",skills:["3D printing", "Laser cutting", "Drilling", "Welding", "Soldering"],links:[["Laser cutting · Delivery Box","/projects/smart-delivery-box/#build"],["3D printing · Health Supply Network","/projects/hybrid-health-supply-network/#build"]]},
-  {label:"Embedded & data acquisition",skills:["ESP32", "Sensors", "Data logging", "LabVIEW", "Microsoft Office / MOS"],links:[]},
+  {label:"Embedded & data acquisition",skills:["ESP32", "ADXL345 / I2C", "Hall sensor / RPM", "Data logging", "RMS / peak", "FFT", "LabVIEW", "Microsoft Office / MOS"],links:[["ESP32 & sensors · NVH Test Rig","/projects/nvh-test-rig/#data-acquisition"],["RMS / peak & FFT · NVH analysis","/projects/nvh-test-rig/#signal-analysis"]]},
 ];
 
 export const boschMetrics: Metric[] = [
@@ -316,7 +340,7 @@ export const boschMetrics: Metric[] = [
 ];
 
 
-// Stable project numbers preserve existing references; display order reflects relevance.
+// Project numbers follow display order; slugs preserve existing links.
 export const featuredProjects = projects.slice(0, 2);
-export const supportingProjects = [projects[3], projects[2]];
-export const archiveProjects = projects.slice(4);
+export const supportingProjects = projects.filter(project => ["bridge-building-competition", "f-race"].includes(project.slug));
+export const archiveProjects = projects.filter(project => ["water-jet-car", "city-level-water-rocket"].includes(project.slug));

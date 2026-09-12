@@ -1,3 +1,4 @@
+import { ActionIcon } from "./action-icon";
 import { profile } from "@/content/site";
 import { withBasePath } from "@/content/site-config";
 
@@ -12,24 +13,24 @@ export function Footer() {
   <a href={`mailto:${profile.email}`}>
     <span>Email</span>
     <strong>{profile.email}</strong>
-    <b aria-hidden="true">↗</b>
+    <b aria-hidden="true"><ActionIcon name="mail" /></b>
   </a>
 
   <a href={profile.linkedin} target="_blank" rel="noreferrer">
     <span>LinkedIn</span>
     <strong>linkedin.com/in/tvmquan</strong>
-    <b aria-hidden="true">↗</b>
+    <b aria-hidden="true"><ActionIcon name="link" /></b>
   </a>
 
   <a href={`tel:${profile.phoneHref}`}>
     <span>Phone</span>
     <strong>{profile.phone}</strong>
-    <b aria-hidden="true">↗</b>
+    <b aria-hidden="true"><ActionIcon name="phone" /></b>
   </a>
 
         
 </div>
-          <a className="footer-resume-download" href={profile.resume} download>Download résumé <span aria-hidden="true">↓</span></a>
+          <a className="footer-resume-download" href={profile.resume} download>Download résumé <span aria-hidden="true"><ActionIcon name="document" /></span></a>
         </div>
       </div>
       <div className="site-shell footer-bottom">

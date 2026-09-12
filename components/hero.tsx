@@ -1,3 +1,4 @@
+import { ActionIcon } from "./action-icon";
 import { profile } from "@/content/site";
 import { withBasePath } from "@/content/site-config";
 import { TechnicalLabel } from "./technical-label";
@@ -24,12 +25,12 @@ export function Hero() {
           </div>
         </div>
         <div className="hero-actions">
-          <a className="button button--dark" href="#projects">View selected projects <span aria-hidden="true">↘</span></a>
-          <a className="button button--line" href={profile.resume} download>Download résumé <span aria-hidden="true">↓</span></a>
+          <a className="button button--dark" href="#projects">View selected projects <span aria-hidden="true"><ActionIcon name="projects" /></span></a>
+          <a className="button button--line" href={profile.resume} download>Download résumé <span aria-hidden="true"><ActionIcon name="document" /></span></a>
         </div>
         <div className="hero-contact">
-          <a href={profile.linkedin} target="_blank" rel="noreferrer">LinkedIn <span className="sr-only">(opens in a new tab)</span><span aria-hidden="true">↗</span></a>
-          <a href={`mailto:${profile.email}`}>Email Quan <span aria-hidden="true">↗</span></a>
+          <a href={profile.linkedin} target="_blank" rel="noreferrer">LinkedIn <span className="sr-only">(opens in a new tab)</span><span aria-hidden="true"><ActionIcon name="link" /></span></a>
+          <a href={`mailto:${profile.email}`}>Email Quan <span aria-hidden="true"><ActionIcon name="mail" /></span></a>
           <span>Summer 2027 co-op</span>
         </div>
       </div>

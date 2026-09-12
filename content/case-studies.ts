@@ -17,6 +17,24 @@ export type CaseDetails = {
 // Editorial restructuring of the existing public portfolio and its downloadable resume, not new test evidence.
 // Missing task ownership, test protocols, and artifacts are identified explicitly.
 const details: Record<string, CaseDetails> = {
+  "nvh-test-rig": {
+    problem: "Compare vibration isolation between rigid, rubber, and isolator mounts using a controlled DC motor + ERW test rig. The project connects mechanical mounting choices with measured vibration and motor speed.",
+    requirements: [
+      { check: "Excitation", specification: "DC motor + ERW", basis: "Controlled excitation described in the résumé" },
+      { check: "Mount comparison", specification: "Rigid / rubber / isolator", basis: "Three interchangeable mounting conditions" },
+      { check: "Vibration sensing", specification: "ADXL345 over I2C", basis: "Accelerometer integrated with ESP32 acquisition" },
+      { check: "Speed measurement", specification: "Hall sensor / RPM", basis: "Time-aligned speed and vibration data" },
+      { check: "Analysis", specification: "RMS / peak and FFT", basis: "Methods used to compare vibration versus speed" },
+    ],
+    ownership: "As a personal project, I engineered the controlled validation rig, integrated synchronized ESP32 data acquisition with the ADXL345 and Hall sensor, and quantified vibration versus speed using RMS/peak metrics and FFT.",
+    decisions: "The design combines controlled ERW excitation with interchangeable mounts so mounting behavior can be compared. Pairing acceleration with RPM connects vibration measurements to the motor's operating speed.",
+    build: "The rig combines a DC motor + ERW excitation system, interchangeable rigid/rubber/isolator mounts, an ESP32, an ADXL345 accelerometer connected over I2C, and a Hall sensor for RPM measurement.",
+    validation: "The comparison uses time-aligned vibration and speed data. RMS and peak metrics describe vibration amplitude, while FFT analysis provides a frequency-domain comparison across mounting conditions.",
+    iteration: "The project is ongoing. Specific mount revisions and before/after measurements are not included in the current résumé.",
+    takeaway: "Mechanical isolation, sensor integration, and signal analysis form one test workflow: acquire vibration alongside RPM, then compare mounting conditions using consistent metrics.",
+    evidence: ["Rig overview and the three mounting configurations", "ESP32 acquisition code and sensor wiring", "Time-aligned acceleration/RPM logs", "RMS, peak, and FFT comparison plots"],
+    resultNote: "The résumé documents the rig, acquisition system, and analysis methods. It does not provide numerical isolation improvements or identify a best-performing mount; the values above describe project scope and methods.",
+  },
   "smart-delivery-box": {
     problem: "The enclosure needed to accommodate 30 × 30 × 40 cm parcels while supporting a reliable latch and sensor integration. The mechanical work had to move beyond a visual mockup and into measurable performance.",
     requirements: [
