@@ -67,6 +67,10 @@ test("project navigation follows the homepage order and always offers a return",
     assert.equal(returnLinks[0][1], `${base}/#projects`, "Return link leads directly to the homepage project section");
     assert.ok(!html.includes("project-return-bottom"), "No duplicate bottom return control remains");
     assert.ok(html.includes('class="next-project"'), "Continue-to-next-project navigation remains available");
+    assert.match(html, /<ul class="case-points"[^>]*><li>/, "Project narratives use semantic bullet lists");
+    if (html.includes('class="case-process"')) {
+      assert.match(html, /<h3>[^<]+<\/h3><ul class="case-points"/, "Process subheadings introduce their own bullet lists");
+    }
   }
 });
 

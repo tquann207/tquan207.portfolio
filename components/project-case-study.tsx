@@ -17,11 +17,15 @@ const sections = [
   ["iteration", "Failure / iteration"], ["takeaway", "Engineering takeaway"],
 ];
 
+function CasePoints({ items, id }: { items: string[]; id?: string }) {
+  return <ul className="case-points" id={id}>{items.map((item, index) => <li key={index}>{item}</li>)}</ul>;
+}
+
 export function ProjectCaseStudy({ project }: { project: Project }) {
   const detail = getCaseDetails(project);
   const next = projects[(projects.findIndex(p => p.slug === project.slug) + 1) % projects.length];
   const media = project.media?.filter(item => item.src) ?? [];
-  const text: Record<string, string | undefined> = detail ? {
+  const text: Record<string, string[] | undefined> = detail ? {
     problem: detail.problem,
     "my-role": detail.ownership,
     "design-decisions": detail.decisions,
@@ -43,14 +47,14 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
       <nav className="case-index" aria-label="Case study sections"><span className="technical-label">CONTENTS / 10</span>{sections.map(([id,label],i) => <a href={`#${id}`} key={id}><span>{String(i + 1).padStart(2,"0")}</span>{label}</a>)}</nav>
       <div className="case-sections">{sections.map(([id,label],i) => <section id={id} key={id} className="case-section" aria-labelledby={`title-${id}`}>
         <TechnicalLabel>{String(i + 1).padStart(2,"0")} / {label}</TechnicalLabel><h2 id={`title-${id}`}>{label}</h2>
-        {text[id] && <p id={id === "problem" && project.sections.some(s => s.id === "challenge") ? "challenge" : undefined}>{text[id]}</p>}
+        {text[id] && <CasePoints items={text[id]} id={id === "problem" && project.sections.some(s => s.id === "challenge") ? "challenge" : undefined} />}
         {id === "requirements" && <ProjectEvidence project={project} />}
-        {id === "engineering-process" && <div className="case-process">{project.sections.filter(s => s.id !== "result" && s.id !== "challenge").map(s => <div id={sections.some(([id]) => id === s.id) ? undefined : s.id} key={s.id}><h3>{s.title}</h3><p>{s.body}</p>{s.bullets && <ul>{s.bullets.map(b => <li key={b}>{b}</li>)}</ul>}</div>)}</div>}
-        {id === "results" && <><dl className="metric-grid">{project.metrics.map(m => <div className="metric" key={m.label}><dt>{m.label}</dt><dd>{m.value}</dd><span>{m.kind === "test" ? "Test scope" : m.kind === "reported" ? "Reported result" : "Project context"}</span></div>)}</dl>{project.sections.filter(s => s.id === "result").map(s => <p key={s.id}>{s.body}</p>)}<p className="documentation-note">{detail.resultNote}</p></>}
+        {id === "engineering-process" && <div className="case-process">{project.sections.filter(s => s.id !== "result" && s.id !== "challenge").map(s => <div id={sections.some(([id]) => id === s.id) ? undefined : s.id} key={s.id}><h3>{s.title}</h3><CasePoints items={s.body} /></div>)}</div>}
+        {id === "results" && <><dl className="metric-grid">{project.metrics.map(m => <div className="metric" key={m.label}><dt>{m.label}</dt><dd>{m.value}</dd><span>{m.kind === "test" ? "Test scope" : m.kind === "reported" ? "Reported result" : "Project context"}</span></div>)}</dl>{project.sections.filter(s => s.id === "result").map(s => <CasePoints key={s.id} items={s.body} />)}<p className="documentation-note">{detail.resultNote}</p></>}
         {id === "my-role" && project.role !== "Personal Project" && <p className="documentation-note">Ownership summary follows the current project record and downloadable résumé. Annotated artifacts should identify the parts and decisions I owned alongside teammates’ deliverables.</p>}
-        {id === "takeaway" && <details className="evidence-needed"><summary>Supporting evidence to add</summary><ul>{detail.evidence.map(item => <li key={item}>{item}</li>)}</ul></details>}
+        {id === "takeaway" && <details className="evidence-needed"><summary>Supporting evidence to add</summary><CasePoints items={detail.evidence} /></details>}
       </section>)}</div>
-    </div> : <div className="site-shell archive-record"><h2>Competition record</h2>{project.sections.map(s => <p id={s.id} key={s.id}>{s.body}</p>)}<dl className="case-metadata">{project.metrics.map(m => <div key={m.label}><dt>{m.label}</dt><dd>{m.value}</dd></div>)}</dl><p className="documentation-note">Design requirements, individual contributions, build records, and test evidence have not yet been provided. This page preserves the existing competition record.</p></div>}
+    </div> : <div className="site-shell archive-record"><h2>Competition record</h2>{project.sections.map(s => <CasePoints id={s.id} key={s.id} items={s.body} />)}<dl className="case-metadata">{project.metrics.map(m => <div key={m.label}><dt>{m.label}</dt><dd>{m.value}</dd></div>)}</dl><p className="documentation-note">Design requirements, individual contributions, build records, and test evidence have not yet been provided. This page preserves the existing competition record.</p></div>}
     <section className="site-shell case-tools" aria-label="Tools and methods"><TechnicalLabel>TOOLS / METHODS</TechnicalLabel><div>{project.tools.map(tool => <span key={tool}>{tool}</span>)}</div></section>
     <div className="site-shell"><Link className="next-project" href={`/projects/${next.slug}/`}><span>NEXT PROJECT / {next.number}</span><strong>{next.title}</strong><span aria-hidden="true"><ActionIcon name="next" /></span></Link></div>
   </main><Footer /></>;

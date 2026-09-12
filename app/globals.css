@@ -279,14 +279,17 @@ main:focus { outline: 0; }
 .case-section > p { max-width: 68ch; }
 .case-section > p + p { margin-top: 18px; }
 .case-process > div + div { border-top: 1px solid var(--border); margin-top: 22px; padding-top: 22px; }
-.case-process h3 { font-size: 1.125rem; margin-bottom: 10px; max-width: 56ch; }
+.case-process h3 { color: var(--dark); font-size: 1.125rem; font-weight: 700; line-height: 1.4; margin-bottom: 12px; max-width: 56ch; }
 .case-process p, .case-process ul { max-width: 68ch; }
-.case-process li { padding-bottom: 6px; }
+.case-points { list-style-type: disc; list-style-position: outside; padding-inline-start: 1.4rem; margin: 0; max-width: 68ch; line-height: 1.7; }
+.case-points > li { padding-inline-start: .3rem; }
+.case-points > li + li { margin-top: .65rem; }
+.case-points > li::marker { color: var(--accent); font-size: .85em; }
+.case-points + .case-points { margin-top: 1rem; }
 .documentation-note { padding: 16px; border-left: 3px solid var(--accent); background: var(--surface); font-size: .875rem; color: var(--muted); margin-top: 20px; }
 .evidence-needed { margin-top: 24px; border-block: 1px solid var(--border); }
 .evidence-needed summary { padding-block: 14px; cursor: pointer; font-size: .875rem; font-weight: 600; min-height: 48px; }
-.evidence-needed ul { padding-left: 22px; font-size: .875rem; }
-.evidence-needed li { margin-bottom: 10px; }
+.evidence-needed .case-points { font-size: .875rem; margin-bottom: 16px; }
 .case-section .metric-grid { grid-template-columns: repeat(2,minmax(0,1fr)); margin-top: 0; margin-bottom: 24px; }
 .case-section .metric:nth-child(odd) { border-left: 0; padding-left: 0; }
 .case-section .metric:nth-child(n+3) { border-top: 1px solid var(--border); }
