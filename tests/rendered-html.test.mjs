@@ -52,7 +52,7 @@ test("project navigation follows the homepage order and always offers a return",
     const navigation = html.match(/<nav\b[^>]*id="primary-navigation"[^>]*>([\s\S]*?)<\/nav>/)?.[1];
     assert.ok(navigation, "Primary navigation is rendered");
     const links = [...navigation.matchAll(/<a\b[^>]*href="([^"]+)"[^>]*>([^<]+)<\/a>/g)];
-    assert.deepEqual(links.map(link => link[2]), ["Experience", "Projects", "About", "Resume", "Contact"]);
+    assert.deepEqual(links.map(link => link[2]), ["Experience", "Projects", "About", "Contact"]);
     assert.equal(links[1][1], `${base}/#projects`, "Projects must return to the homepage section");
   }
   assert.ok(!home.includes('class="project-return-bar"'), "Homepage introduction stays unchanged");

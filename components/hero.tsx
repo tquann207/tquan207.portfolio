@@ -30,7 +30,7 @@ export function Hero() {
         <div className="hero-contact">
           <a href={profile.linkedin} target="_blank" rel="noreferrer">LinkedIn <span className="sr-only">(opens in a new tab)</span><span aria-hidden="true">↗</span></a>
           <a href={`mailto:${profile.email}`}>Email Quan <span aria-hidden="true">↗</span></a>
-          <span>SolidWorks CSWP · Summer 2027 co-op</span>
+          <span>Summer 2027 co-op</span>
         </div>
       </div>
       <figure className="hero-visual">
