@@ -26,7 +26,7 @@ export function Hero() {
         </div>
         <div className="hero-actions">
           <a className="button button--dark" href="#projects">View selected projects <span aria-hidden="true"><ActionIcon name="projects" /></span></a>
-          <a className="button button--line" href={profile.resume} download>Download résumé <span aria-hidden="true"><ActionIcon name="document" /></span></a>
+          <a className="button button--line" href={profile.resume} download="Quan Tran Resume.pdf">Download résumé <span aria-hidden="true"><ActionIcon name="document" /></span></a>
         </div>
         <div className="hero-contact">
           <a href={profile.linkedin} target="_blank" rel="noreferrer">LinkedIn <span className="sr-only">(opens in a new tab)</span><span aria-hidden="true"><ActionIcon name="link" /></span></a>

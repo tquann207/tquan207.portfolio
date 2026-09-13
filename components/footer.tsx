@@ -30,7 +30,7 @@ export function Footer() {
 
         
 </div>
-          <a className="footer-resume-download" href={profile.resume} download>Download résumé <span aria-hidden="true"><ActionIcon name="document" /></span></a>
+          <a className="footer-resume-download" href={profile.resume} download="Quan Tran Resume.pdf">Download résumé <span aria-hidden="true"><ActionIcon name="document" /></span></a>
         </div>
       </div>
       <div className="site-shell footer-bottom">
