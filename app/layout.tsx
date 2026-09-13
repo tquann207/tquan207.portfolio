@@ -40,7 +40,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="antialiased"><a className="skip-link" href="#main-content">Skip to main content</a><noscript><style>{"@media(max-width:760px){.menu-button{display:none}.navbar{position:static;height:auto}.navbar-inner{flex-wrap:wrap;padding-block:12px}.nav-links{display:flex;flex-wrap:wrap;gap:8px 20px}}"}</style></noscript>{children}</body>
+      <body id="top" className="antialiased"><a className="skip-link" href="#main-content">Skip to main content</a><noscript><style>{"@media(max-width:760px){.menu-button{display:none}.navbar{position:static;height:auto}.navbar-inner{flex-wrap:wrap;padding-block:12px}.nav-links{display:flex;flex-wrap:wrap;gap:8px 20px}}"}</style></noscript>{children}</body>
     </html>
   );
 }

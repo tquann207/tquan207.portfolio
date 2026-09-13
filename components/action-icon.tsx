@@ -7,6 +7,7 @@ const shapes = {
   mail: <><rect x="3" y="5" width="18" height="14" rx="2" /><path d="m3 6 9 7 9-7" /></>,
   phone: <path d="M7 3H4a1 1 0 0 0-1 1c0 9.4 7.6 17 17 17a1 1 0 0 0 1-1v-3l-5-2-2 2a14 14 0 0 1-7-7l2-2Z" />,
   home: <><path d="m3 10 9-7 9 7M5 9v12h5v-7h4v7h5V9" /></>,
+  top: <><path d="M5 4h14M6 13l6-6 6 6M12 7v14" /></>,
   previous: <path d="m14 6-6 6 6 6" />,
   next: <path d="m10 6 6 6-6 6" />,
 } satisfies Record<string, ReactNode>;

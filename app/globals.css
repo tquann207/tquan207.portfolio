@@ -331,9 +331,12 @@ main:focus { outline: 0; }
 .footer-bottom > div:first-child { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
 .footer-bottom strong { font-size: .875rem; }
 .footer-bottom span { font-size: .75rem; color: var(--inverse-muted); }
-.footer-bottom nav { display: flex; flex-direction: column; align-items: flex-start; gap: 2px; }
+.footer-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 28px; }
+.footer-bottom nav { display: flex; align-items: center; gap: 24px; }
 .footer-bottom nav a { display: inline-flex; align-items: center; min-height: 44px; font-size: .875rem; transition: color .18s ease; }
 .footer-bottom nav a:hover { color: #f0b8ab; }
+.footer-back-top { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 44px; padding: 10px 16px; border: 1px solid #61717b; border-radius: 999px; font-size: .875rem; white-space: nowrap; transition: background .18s ease, color .18s ease, border-color .18s ease; }
+.footer-back-top:hover { background: white; color: var(--dark); border-color: white; }
 .footer-location { display: flex; gap: 20px; }
 .not-found { padding-block: 120px; }
 .not-found h1 { margin-block: 20px; font-size: clamp(2rem,5vw,4rem); }
