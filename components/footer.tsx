@@ -35,10 +35,13 @@ export function Footer() {
       </div>
       <div className="site-shell footer-bottom">
         <div><strong>QUAN TRAN</strong><span>Mechanical Engineering<br />University of Cincinnati</span></div>
+        <div className="footer-actions">
         <nav aria-label="Footer navigation">
           <a href={withBasePath("/#experience")}>Experience</a>
           <a href={withBasePath("/#projects")}>Projects</a>
         </nav>
+        <a className="footer-back-top" href="#top">Back to top <ActionIcon name="top" /></a>
+        </div>
         <div className="footer-location"><span>Cincinnati, Ohio</span><span>© {new Date().getFullYear()}</span></div>
       </div>
     </footer>
