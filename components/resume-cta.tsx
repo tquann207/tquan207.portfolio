@@ -9,7 +9,7 @@ export function ResumeCta() {
       <Reveal className="site-shell resume-cta__inner">
         <TechnicalLabel tone="inverse">DOCUMENT / LATEST RESUME</TechnicalLabel>
         <h2><span>Projects.</span><span>Experience.</span><span>Results.</span></h2>
-        <a className="button button--accent" href={profile.resume} download>Download resume <span aria-hidden="true"><ActionIcon name="document" /></span></a>
+        <a className="button button--accent" href={profile.resume} download="Quan Tran Resume.pdf">Download resume <span aria-hidden="true"><ActionIcon name="document" /></span></a>
       </Reveal>
     </section>
   );
