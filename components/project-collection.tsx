@@ -8,31 +8,44 @@ import flowStyles from "./project-flow.module.css";
 
 function ProjectCard({ project, onOpen }: { project: Project; onOpen: (project: Project) => void }) {
   const { year, category, highlight } = project.overview;
+  const media = project.media?.[0];
 
   return (
-    <article id={project.slug}>
+    <article className={flowStyles.projectItem} id={project.slug}>
       <button
         className={`${styles.projectCard} ${flowStyles.projectCard}`}
         type="button"
         onClick={() => onOpen(project)}
       >
-        <span className={styles.projectCardTop}>
-          <span className={styles.projectNumber}>PROJECT {project.number}</span>
-          <time className={styles.projectYear} dateTime={year}>{year}</time>
+        <span className={flowStyles.projectMedia} aria-hidden={media ? undefined : true}>
+          {media ? (
+            <img src={media.src} alt={media.alt} />
+          ) : (
+            <span className={flowStyles.projectMediaFallback}>
+              <span>{project.number}</span>
+              <b>{project.shortTitle}</b>
+              <small>{category}</small>
+            </span>
+          )}
+        </span>
+
+        <span className={flowStyles.projectMetaRow}>
+          <span className={flowStyles.projectNumber}>PROJECT {project.number}</span>
+          <time dateTime={year}>{year}</time>
         </span>
 
         <span className={flowStyles.projectIdentity}>
-          <span className={styles.projectCategory}>{category}</span>
-          <strong className={styles.projectTitle}>{project.title}</strong>
-          <span className={styles.projectRole}>{project.role}</span>
+          <span className={flowStyles.projectCategory}>{category}</span>
+          <strong className={flowStyles.projectTitle}>{project.title}</strong>
+          <span className={flowStyles.projectRole}>{project.role}</span>
         </span>
 
-        <span className={styles.projectCardBottom}>
-          <span className={styles.projectHighlight}>
+        <span className={flowStyles.projectBottom}>
+          <span className={flowStyles.projectHighlight}>
             <strong>{highlight.value}</strong>
             <span>{highlight.label}</span>
           </span>
-          <span className={styles.projectOpen}>Open +</span>
+          <span className={flowStyles.projectOpen} aria-hidden="true">→</span>
         </span>
       </button>
     </article>
@@ -120,14 +133,22 @@ export function ProjectCollection({ headingLevel = 2 }: { headingLevel?: 1 | 2 }
   return (
     <div className="site-shell">
       <header className={flowStyles.collectionHeader}>
-        <div>
-          <TechnicalLabel>ENGINEERING PROJECTS / {String(projects.length).padStart(2, "0")}</TechnicalLabel>
-          <Heading id="project-overview-title">Projects.</Heading>
-          <p>Real problems, physical builds, test data, and competition work across mechanical design and validation.</p>
+        <div className={flowStyles.collectionTitleBlock}>
+          <TechnicalLabel>FEATURED WORK</TechnicalLabel>
+          <Heading id="project-overview-title">
+            Real Projects.<br />
+            <span>Real Impact.</span>
+          </Heading>
         </div>
-        <div className={flowStyles.collectionMeta}>
-          <span>{years[0]} — {years.at(-1)}</span>
-          <span>Click any project for details</span>
+
+        <p className={flowStyles.collectionIntro}>
+          A mix of mechanical design, testing, product development, and competition work that shows how I turn engineering problems into measurable results.
+        </p>
+
+        <div className={flowStyles.collectionStats} aria-label="Project portfolio summary">
+          <span><strong>{projects.length}</strong><small>Projects</small></span>
+          <span><strong>6</strong><small>Engineering stages</small></span>
+          <span><strong>∞</strong><small>Real-world skills</small></span>
         </div>
       </header>
 
@@ -135,17 +156,11 @@ export function ProjectCollection({ headingLevel = 2 }: { headingLevel?: 1 | 2 }
         {projects.map((project) => (
           <ProjectCard key={project.slug} project={project} onOpen={setActiveProject} />
         ))}
-
-        <a className={flowStyles.processBridge} href="#engineering-process">
-          <span className={flowStyles.processBridgeEyebrow}>NEXT / ENGINEERING PROCESS</span>
-          <strong>How these projects are built.</strong>
-          <span className={flowStyles.processBridgeFooter}>06 stages <b aria-hidden="true">↓</b></span>
-        </a>
       </div>
 
       <div className={flowStyles.collectionFooter}>
-        <span>DESIGN / BUILD / TEST / ANALYZE / IMPROVE</span>
-        <span>PROJECT EVIDENCE → ENGINEERING PROCESS</span>
+        <span>{years[0]} — {years.at(-1)}</span>
+        <span>Click any project to open details</span>
       </div>
 
       {activeProject ? <ProjectModal project={activeProject} onClose={() => setActiveProject(null)} /> : null}
