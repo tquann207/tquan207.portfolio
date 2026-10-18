@@ -1,0 +1,118 @@
+.projectIdentity {
+  display: grid;
+  align-content: end;
+  gap: 7px;
+  min-width: 0;
+}
+
+.projectIdentity > span,
+.projectIdentity > strong {
+  display: block;
+}
+
+.projects {
+  position: relative;
+  padding-top: var(--section);
+  padding-bottom: 34px;
+  background: var(--background);
+}
+
+.connector {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 24px;
+  align-items: center;
+  margin-top: clamp(42px, 5vw, 70px);
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  font: .75rem/1.5 var(--mono);
+  letter-spacing: .055em;
+  text-transform: uppercase;
+}
+
+.connector::before {
+  content: "";
+  position: absolute;
+  top: -1px;
+  left: 0;
+  width: clamp(82px, 14vw, 190px);
+  height: 2px;
+  background: var(--accent);
+  transform-origin: left center;
+  animation: connectorDraw .75s cubic-bezier(.22,.61,.36,1) both;
+}
+
+.connectorMark {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--accent);
+  white-space: nowrap;
+}
+
+.connectorMark::after {
+  content: "↓";
+  display: inline-block;
+  transition: transform .22s ease;
+}
+
+.connector:hover .connectorMark::after {
+  transform: translateY(3px);
+}
+
+.process {
+  position: relative;
+  padding-top: clamp(42px, 5vw, 68px);
+  padding-bottom: var(--section);
+  background: var(--background);
+}
+
+.process::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: var(--page);
+  height: 1px;
+  background: linear-gradient(90deg, var(--accent) 0 12%, var(--border) 12% 100%);
+  transform: translateX(-50%);
+  opacity: .7;
+}
+
+@keyframes connectorDraw {
+  from { transform: scaleX(0); opacity: 0; }
+  to { transform: scaleX(1); opacity: 1; }
+}
+
+@media (max-width: 760px) {
+  .projects {
+    padding-top: 58px;
+    padding-bottom: 24px;
+  }
+
+  .connector {
+    grid-template-columns: 1fr;
+    gap: 8px;
+    margin-top: 36px;
+  }
+
+  .connectorMark {
+    justify-self: start;
+  }
+
+  .process {
+    padding-top: 36px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .connector::before {
+    animation: none;
+  }
+
+  .connectorMark::after {
+    transition: none;
+  }
+}
