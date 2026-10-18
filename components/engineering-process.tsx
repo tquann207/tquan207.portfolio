@@ -1,5 +1,5 @@
 import { TechnicalLabel } from "./technical-label";
-import styles from "./project-flow.module.css";
+import styles from "./engineering-process.module.css";
 
 const stages = [
   {
@@ -37,47 +37,57 @@ const stages = [
 export function EngineeringProcess() {
   return (
     <section className={styles.process} id="engineering-process" aria-labelledby="process-title">
-      <div className="site-shell">
-        <div className={styles.processHeader}>
-          <div>
-            <TechnicalLabel>ENGINEERING PROCESS</TechnicalLabel>
-            <h2 id="process-title">
-              From Requirements<br />
-              to <span>Real-World Results.</span>
-            </h2>
-          </div>
-
+      <div className={`site-shell ${styles.shell}`}>
+        <div className={styles.intro}>
+          <TechnicalLabel>ENGINEERING PROCESS</TechnicalLabel>
+          <h2 id="process-title">
+            Iterate<br />
+            to Better<br />
+            <span>Solutions.</span>
+          </h2>
           <p>
-            A repeatable engineering process applied across different projects — from defining requirements to testing, analysis, and continuous improvement.
+            A continuous engineering cycle from requirements to validated results, with each stage feeding the next decision.
           </p>
 
-          <span className={styles.processCount}>06 STAGES / APPLIED ACROSS PROJECTS</span>
+          <div className={styles.legend} aria-label="Process legend">
+            <span><i aria-hidden="true" /> Engineering process</span>
+            <span><i aria-hidden="true" /> Applied across projects</span>
+          </div>
         </div>
 
-        <ol className={styles.processGrid}>
+        <div className={styles.diagram} aria-label="Six-stage engineering process">
+          <svg className={styles.diagramSvg} viewBox="0 0 400 400" aria-hidden="true">
+            <polygon points="200,30 347,115 347,285 200,370 53,285 53,115" />
+            <circle cx="200" cy="200" r="88" />
+          </svg>
+
+          <div className={styles.centerMark} aria-hidden="true">
+            <span>Design · Build · Test · Improve</span>
+          </div>
+
           {stages.map((stage, index) => (
-            <li className={styles.stage} key={stage.name}>
-              <div className={styles.stageHead}>
-                <span className={styles.stageNumber}>{String(index + 1).padStart(2, "0")}</span>
-                <h3>{stage.name}</h3>
-              </div>
-
-              <p className={styles.stageDetail}>{stage.detail}</p>
-
-              <div className={styles.stageVisual} aria-hidden="true">
-                <span>{String(index + 1).padStart(2, "0")}</span>
-                <i />
-                <i />
-                <i />
-              </div>
-
-              <span className={styles.stageEvidenceLabel}>Example projects</span>
-              <div className={styles.evidenceChips}>
-                {stage.evidence.map((item) => <span key={item}>{item}</span>)}
-              </div>
-            </li>
+            <div className={`${styles.node} ${styles[`node${index + 1}`]}`} key={stage.name}>
+              <span className={styles.nodeButton}>{String(index + 1).padStart(2, "0")}</span>
+              <strong className={styles.nodeName}>{stage.name}</strong>
+              <span className={styles.nodeDetail}>{stage.detail}</span>
+            </div>
           ))}
-        </ol>
+        </div>
+
+        <aside className={styles.evidence} aria-label="Example projects at each engineering stage">
+          <div className={styles.evidenceHeader}>EXAMPLE PROJECTS AT EACH STAGE</div>
+          <ol className={styles.evidenceList}>
+            {stages.map((stage, index) => (
+              <li className={styles.evidenceRow} key={stage.name}>
+                <span className={styles.evidenceIndex}>{String(index + 1).padStart(2, "0")}</span>
+                <strong className={styles.evidenceName}>{stage.name}</strong>
+                <div className={styles.evidenceChips}>
+                  {stage.evidence.map((item) => <span key={item}>{item}</span>)}
+                </div>
+              </li>
+            ))}
+          </ol>
+        </aside>
       </div>
     </section>
   );
