@@ -16,7 +16,7 @@ function ProjectCard({ project, onOpen }: { project: Project; onOpen: (project: 
           <time className={styles.projectYear} dateTime={year}>{year}</time>
         </span>
 
-        <span>
+        <span className={styles.projectIdentity}>
           <span className={styles.projectCategory}>{category}</span>
           <strong className={styles.projectTitle}>{project.title}</strong>
           <span className={styles.projectRole}>{project.role}</span>
