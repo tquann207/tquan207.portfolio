@@ -63,7 +63,7 @@ export const projects: Project[] = [
     shortTitle: "Delivery Box",
     overview: { year: "2026", category: "Mechanical Design", highlight: { value: "600 cycles", label: "Latch cycling tested", kind: "test" } },
     role: "Mechanical Lead",
-    timeline: "Feb 2026 — Present",
+    timeline: "Feb 2026 — Mar 2026",
     location: "Cincinnati, Ohio",
     teamSize: "4 people",
     categories: ["Mechanical Design", "Prototype Development", "Validation"],
@@ -88,7 +88,7 @@ export const projects: Project[] = [
         id: "design",
         eyebrow: "02 / Design",
         title: "Parametric geometry prepared for fabrication.",
-        body: ["The enclosure used laser-cut wood and acrylic.", "Parametric CAD and DXF files were prepared to a ±0.5 mm tolerance so the team could fabricate, assemble, and revise the design efficiently.", "Designed around 30 × 30 × 40 cm parcels."],
+        body: ["Designed a laser-cut wood and acrylic enclosure.", "Produced parametric CAD and DXF files with ±0.5 mm dimensional tolerances.", "Designed around 30 × 30 × 40 cm parcels."],
         mediaLabel: "CAD RENDER",
         mediaHint: "Parametric enclosure CAD required",
       },
@@ -96,7 +96,7 @@ export const projects: Project[] = [
         id: "validation",
         eyebrow: "03 / Validation",
         title: "Repeatable tests exposed what needed to change.",
-        body: ["Latch cycling: 600 cycles.", "Retention test: 60 N.", "Drop test: 1 m with a 5 kg load.", "Insertion testing: 200 trials.", "Test logs guided design changes that reduced false triggers below 2%."],
+        body: ["Durability testing: 600 latch cycles.", "Retention test: 60 N.", "Drop test: 1 m with a 5 kg load.", "Insertion testing: 200 trials.", "Test data guided mechanical design iterations that reduced the false-trigger rate below 2%."],
         mediaLabel: "TEST SETUP",
         mediaHint: "Cycle or drop-test media required",
       },
@@ -136,39 +136,39 @@ export const projects: Project[] = [
     timeline: "Aug 2025 — Dec 2025",
     location: "Cincinnati, Ohio",
     teamSize: "4 people",
-    categories: ["Requirements", "Concept Selection", "Prototype Validation"],
-    tools: ["Verification matrix", "Decision matrix", "3D printing"],
-    summary: "A drone-enabled medical supply hub concept developed from measurable requirements through prototype validation.",
+    categories: ["Requirements", "Structural Prototyping", "Load Validation"],
+    tools: ["3D printing", "Polymer prototyping", "Load testing", "Design iteration"],
+    summary: "A drone-enabled medical supply platform developed from measurable requirements through structural prototyping, load characterization, and redesign after failure.",
     metrics: [
-      { value: "7", label: "Requirements defined", kind: "context" },
+      { value: "7", label: "Mechanical & usability requirements", kind: "context" },
       { value: "4", label: "Team members", kind: "context" },
-      { value: "3 ft", label: "Prototype drop-test height", kind: "test" },
-      { value: "5 lb", label: "Prototype test load", kind: "test" },
+      { value: "2", label: "Load directions evaluated", kind: "test" },
+      { value: "2 → 4", label: "Payload-mount support points", kind: "context" },
     ],
     sections: [
       {
         id: "requirements",
         eyebrow: "01 / Requirements",
-        title: "Start with criteria that can be verified.",
-        body: ["Defined seven measurable requirements for a drone-enabled medical supply hub.", "Translated the requirements into a verification matrix covering fit, load, drop, and usability."],
+        title: "Translate system needs into measurable engineering criteria.",
+        body: ["Translated system needs into seven measurable mechanical and usability requirements for a drone-enabled medical supply platform.", "Led a four-member team through concept development and prototype validation."],
         mediaLabel: "REQUIREMENT TABLE",
-        mediaHint: "Verification matrix required",
-      },
-      {
-        id: "selection",
-        eyebrow: "02 / Selection",
-        title: "Compare concepts against the same priorities.",
-        body: ["A weighted decision matrix was used to evaluate concepts before committing fabrication effort, keeping the selection tied to agreed engineering criteria."],
-        mediaLabel: "CONCEPT STUDY",
-        mediaHint: "Decision matrix or sketches required",
+        mediaHint: "Requirements or concept documentation required",
       },
       {
         id: "prototype",
-        eyebrow: "03 / Prototype",
-        title: "Fabricate, test, document, correct.",
-        body: ["Fabricated a 3D-printed interface.", "Validated the prototype with a 3-ft drop test and a 5-lb load test."],
+        eyebrow: "02 / Prototype & Test",
+        title: "Use physical prototypes to characterize structural performance.",
+        body: ["Fabricated 3D-printed structural prototypes using multiple polymer materials.", "Evaluated load capacity under upward and downward loading to characterize structural performance and identify failure limits."],
         mediaLabel: "PROTOTYPE PHOTO",
-        mediaHint: "3D-printed interface required",
+        mediaHint: "3D-printed structural prototype required",
+      },
+      {
+        id: "redesign",
+        eyebrow: "03 / Redesign",
+        title: "Turn overload failure into a stronger mounting strategy.",
+        body: ["Redesigned the underside payload-mount geometry after overload failure.", "Replaced two support legs with four mounting points to distribute load more evenly across the drone structure."],
+        mediaLabel: "REDESIGN DETAIL",
+        mediaHint: "Payload-mount redesign evidence required",
       },
     ],
   },
@@ -322,20 +322,94 @@ export const projects: Project[] = [
 ];
 
 export const skillGroups = [
-  {label:"Design",skills:["SolidWorks / CSWP", "Siemens NX", "AutoCAD", "GD&T", "Tolerance analysis"],links:[["SolidWorks · Bridge design","/projects/bridge-building-competition/#engineering-process"],["AutoCAD · F-Race drawings","/projects/f-race/#engineering-process"]]},
-  {label:"Simulation & analysis",skills:["SolidWorks Simulation / FEA", "MATLAB", "Python", "Measurement data analysis"],links:[["FEA · Bridge analysis","/projects/bridge-building-competition/#engineering-process"],["Simulation support · F-Race","/projects/f-race/#my-role"]]},
-  {label:"Test & validation",skills:["Mechanical testing", "Electrical testing", "Chamber testing", "Fixture design / setup", "Test-plan interpretation", "Pass/fail reporting", "Failure-mode documentation"],links:[["Connector validation · Bosch","/#experience"],["Mechanical testing · Delivery Box","/projects/smart-delivery-box/#validation"]]},
-  {label:"Prototyping & manufacturing",skills:["3D printing", "Laser cutting", "Drilling", "Welding", "Soldering"],links:[["Laser cutting · Delivery Box","/projects/smart-delivery-box/#build"],["3D printing · Health Supply Network","/projects/hybrid-health-supply-network/#build"]]},
-  {label:"Embedded & data acquisition",skills:["ESP32", "ADXL345 / I2C", "Hall sensor / RPM", "Data logging", "RMS / peak", "FFT", "LabVIEW", "Microsoft Office / MOS"],links:[["ESP32 & sensors · NVH Test Rig","/projects/nvh-test-rig/#data-acquisition"],["RMS / peak & FFT · NVH analysis","/projects/nvh-test-rig/#signal-analysis"]]},
+  {
+    label: "Mechanical design & simulation",
+    skills: [
+      "SolidWorks / CSWP",
+      "Siemens NX",
+      "AutoCAD",
+      "ANSYS Workbench / basic structural FEA",
+      "SolidWorks Simulation / FEA",
+      "GD&T",
+      "Tolerance analysis",
+    ],
+    links: [
+      ["SolidWorks · Bridge design", "/projects/bridge-building-competition/#engineering-process"],
+      ["AutoCAD · F-Race drawings", "/projects/f-race/#engineering-process"],
+    ],
+  },
+  {
+    label: "Fabrication & prototyping",
+    skills: ["3D printing", "Laser cutting", "Welding", "Soldering", "Drilling", "Basic shop fabrication"],
+    links: [
+      ["Laser cutting · Delivery Box", "/projects/smart-delivery-box/#design"],
+      ["3D printing · Health Supply Network", "/projects/hybrid-health-supply-network/#prototype"],
+    ],
+  },
+  {
+    label: "Testing & validation",
+    skills: [
+      "Mechanical testing",
+      "Electrical testing",
+      "Environmental testing",
+      "Chamber testing",
+      "Fixture design / setup",
+      "Measurement system setup",
+      "Test planning",
+      "Test-plan interpretation",
+      "Data analysis",
+      "Failure analysis",
+      "Pass / fail reporting",
+      "Failure-mode documentation",
+    ],
+    links: [
+      ["Connector validation · Bosch", "/#experience"],
+      ["Mechanical testing · Delivery Box", "/projects/smart-delivery-box/#validation"],
+    ],
+  },
+  {
+    label: "Programming, instrumentation & data",
+    skills: [
+      "Python",
+      "MATLAB",
+      "LabVIEW",
+      "ESP32",
+      "Sensor integration",
+      "Data logging",
+      "RMS / FFT analysis",
+      "Measurement data analysis",
+      "ADXL345 / I2C",
+      "Hall sensor / RPM",
+      "Microsoft Office / MOS",
+    ],
+    links: [
+      ["ESP32 & sensors · NVH Test Rig", "/projects/nvh-test-rig/#data-acquisition"],
+      ["RMS / peak & FFT · NVH analysis", "/projects/nvh-test-rig/#signal-analysis"],
+    ],
+  },
 ];
 
 export const boschMetrics: Metric[] = [
   { value: "5+", label: "Validation procedures conducted" },
   { value: "300+", label: "Connector specimens prepared / tested" },
-  { value: "6+", label: "Validation programs supported" },
-  { value: "40+", label: "Pass / fail reports supported" },
+  { value: "6+", label: "Customer-specific validation projects" },
+  { value: "10+", label: "Pass / fail reports documented" },
 ];
 
+export const bearcatHighlights = [
+  {
+    title: "Motor test bench",
+    detail: "Supported mechanical design of a motor test bench for operation up to the motor’s 20,000 rpm maximum speed, developing fixture-layout and high-speed test concepts with safety mechanisms for controlled operation.",
+  },
+  {
+    title: "Quick-jack redesign",
+    detail: "Assisted with redesign of the chassis quick-jack assembly for the 185 kg vehicle mass, evaluating geometry, mechanical interfaces, and load paths to improve lifting stability and structural robustness.",
+  },
+  {
+    title: "Brake-line integration",
+    detail: "Supported brake-line layout development by coordinating routing and component placement with drivetrain members to address packaging and vehicle-integration constraints.",
+  },
+];
 
 // Project numbers follow display order; slugs preserve existing links.
 export const featuredProjects = projects.slice(0, 2);
