@@ -11,7 +11,11 @@ function ProjectCard({ project, onOpen }: { project: Project; onOpen: (project: 
 
   return (
     <article id={project.slug}>
-      <button className={styles.projectCard} type="button" onClick={() => onOpen(project)}>
+      <button
+        className={`${styles.projectCard} ${flowStyles.projectCard}`}
+        type="button"
+        onClick={() => onOpen(project)}
+      >
         <span className={styles.projectCardTop}>
           <span className={styles.projectNumber}>PROJECT {project.number}</span>
           <time className={styles.projectYear} dateTime={year}>{year}</time>
@@ -28,7 +32,7 @@ function ProjectCard({ project, onOpen }: { project: Project; onOpen: (project: 
             <strong>{highlight.value}</strong>
             <span>{highlight.label}</span>
           </span>
-          <span className={styles.projectOpen}>Open project +</span>
+          <span className={styles.projectOpen}>Open +</span>
         </span>
       </button>
     </article>
@@ -115,25 +119,33 @@ export function ProjectCollection({ headingLevel = 2 }: { headingLevel?: 1 | 2 }
 
   return (
     <div className="site-shell">
-      <header className="project-collection__heading">
+      <header className={flowStyles.collectionHeader}>
         <div>
-          <TechnicalLabel>ENGINEERING PROJECTS &amp; COMPETITIONS</TechnicalLabel>
-          <Heading className="project-collection__title" id="project-overview-title">Project collection.</Heading>
+          <TechnicalLabel>ENGINEERING PROJECTS / {String(projects.length).padStart(2, "0")}</TechnicalLabel>
+          <Heading id="project-overview-title">Projects.</Heading>
+          <p>Real problems, physical builds, test data, and competition work across mechanical design and validation.</p>
         </div>
-        <span className="project-collection__count" aria-label={`${projects.length} projects`}>
-          {String(projects.length).padStart(2, "0")}
-        </span>
+        <div className={flowStyles.collectionMeta}>
+          <span>{years[0]} — {years.at(-1)}</span>
+          <span>Click any project for details</span>
+        </div>
       </header>
 
-      <div className={styles.projectGrid}>
+      <div className={flowStyles.projectGrid}>
         {projects.map((project) => (
           <ProjectCard key={project.slug} project={project} onOpen={setActiveProject} />
         ))}
+
+        <a className={flowStyles.processBridge} href="#engineering-process">
+          <span className={flowStyles.processBridgeEyebrow}>NEXT / ENGINEERING PROCESS</span>
+          <strong>How these projects are built.</strong>
+          <span className={flowStyles.processBridgeFooter}>06 stages <b aria-hidden="true">↓</b></span>
+        </a>
       </div>
 
-      <div className="project-collection__footer">
-        <span>CLICK A PROJECT TO OPEN DETAILS</span>
-        <span>{years[0]} — {years.at(-1)}</span>
+      <div className={flowStyles.collectionFooter}>
+        <span>DESIGN / BUILD / TEST / ANALYZE / IMPROVE</span>
+        <span>PROJECT EVIDENCE → ENGINEERING PROCESS</span>
       </div>
 
       {activeProject ? <ProjectModal project={activeProject} onClose={() => setActiveProject(null)} /> : null}
