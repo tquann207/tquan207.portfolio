@@ -4,7 +4,7 @@ import styles from "./project-flow.module.css";
 const stages = [
   {
     name: "Define",
-    detail: "Requirements and acceptance criteria",
+    detail: "Requirements and constraints",
     evidence: ["Hybrid Health", "Delivery Box"],
   },
   {
@@ -19,57 +19,65 @@ const stages = [
   },
   {
     name: "Test",
-    detail: "Instrumentation, validation, measurements",
+    detail: "Instrumentation and validation",
     evidence: ["Bosch", "NVH Rig"],
   },
   {
     name: "Analyze",
     detail: "Data, failure modes, interpretation",
-    evidence: ["Bosch", "NVH Rig"],
+    evidence: ["Bosch", "Delivery Box"],
   },
   {
     name: "Improve",
     detail: "Iteration, corrective action, optimization",
-    evidence: ["Bridge", "Delivery Box"],
+    evidence: ["Bridge", "Hybrid Health"],
   },
 ];
 
 export function EngineeringProcess() {
   return (
-    <section className={`${styles.process} process-section`} id="engineering-process" aria-labelledby="process-title">
+    <section className={styles.process} id="engineering-process" aria-labelledby="process-title">
       <div className="site-shell">
-        <div className={styles.processIntro}>
+        <div className={styles.processHeader}>
           <div>
-            <TechnicalLabel>ENGINEERING PROCESS / 06 STAGES</TechnicalLabel>
-            <h2 id="process-title">How these projects <span>are built.</span></h2>
-            <p>A repeatable engineering loop from requirements to measured results, with project evidence tied to each stage.</p>
+            <TechnicalLabel>ENGINEERING PROCESS</TechnicalLabel>
+            <h2 id="process-title">
+              From Requirements<br />
+              to <span>Real-World Results.</span>
+            </h2>
           </div>
 
-          <div className={styles.processContext}>
-            PROCESS / EVIDENCE / ITERATION
-            <strong>Different projects. The same engineering mindset.</strong>
-          </div>
+          <p>
+            A repeatable engineering process applied across different projects — from defining requirements to testing, analysis, and continuous improvement.
+          </p>
+
+          <span className={styles.processCount}>06 STAGES / APPLIED ACROSS PROJECTS</span>
         </div>
 
-        <ol className={styles.pipeline}>
+        <ol className={styles.processGrid}>
           {stages.map((stage, index) => (
             <li className={styles.stage} key={stage.name}>
-              <span className={styles.stageNumber}>{String(index + 1).padStart(2, "0")}</span>
-              <h3>{stage.name}</h3>
+              <div className={styles.stageHead}>
+                <span className={styles.stageNumber}>{String(index + 1).padStart(2, "0")}</span>
+                <h3>{stage.name}</h3>
+              </div>
+
               <p className={styles.stageDetail}>{stage.detail}</p>
-              <span className={styles.stageEvidenceLabel}>Project evidence</span>
+
+              <div className={styles.stageVisual} aria-hidden="true">
+                <span>{String(index + 1).padStart(2, "0")}</span>
+                <i />
+                <i />
+                <i />
+              </div>
+
+              <span className={styles.stageEvidenceLabel}>Example projects</span>
               <div className={styles.evidenceChips}>
                 {stage.evidence.map((item) => <span key={item}>{item}</span>)}
               </div>
             </li>
           ))}
         </ol>
-
-        <div className={styles.iterationLoop}>
-          <b aria-hidden="true">↺</b>
-          <span>ITERATE / BETTER SOLUTIONS</span>
-          <b aria-hidden="true">↻</b>
-        </div>
       </div>
     </section>
   );
