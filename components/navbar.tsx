@@ -29,7 +29,7 @@ export function Navbar() {
       <div className="navbar-inner site-shell" onBlur={(event) => {
         if (!event.currentTarget.contains(event.relatedTarget)) setOpen(false);
       }}>
-        <a className="wordmark" href={withBasePath("/")} aria-label="Quan Tran home">QUAN TRAN <span>ME / 26</span></a>
+        <a className="wordmark" href={withBasePath("/")} aria-label="Quan Tran home">QUAN TRAN</a>
         <button ref={menuButton} className="menu-button" type="button" aria-controls="primary-navigation" aria-expanded={open} onClick={() => setOpen(!open)}>{open ? "Close menu" : "Menu"}</button>
         <nav id="primary-navigation" className={open ? "nav-links nav-links--open" : "nav-links"} aria-label="Primary navigation">
           {links.map(([label, href]) => {
