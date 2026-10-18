@@ -7,7 +7,7 @@ export function Hero() {
   return (
     <section className="hero site-shell" aria-labelledby="hero-title">
       <div className="hero-copy">
-        <TechnicalLabel>ENGINEERING PORTFOLIO / 2026</TechnicalLabel>
+        <TechnicalLabel>ENGINEERING PORTFOLIO</TechnicalLabel>
         <h1 id="hero-title" className="hero-title" aria-label="Quan Tran — Mechanical Engineering">
           <span className="hero-name">QUAN TRAN</span>
           <span>MECHANICAL</span>
